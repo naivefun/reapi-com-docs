@@ -1,31 +1,32 @@
-# Another Page
+# The Predominant Code-First Approach in Current API Platforms
 
-```js filename="demo.js" {3} copy
-let a = 1;
+In the landscape of current API platforms, there's a noticeable trend towards a 'Code-First' approach. This methodology prioritizes the debugging of APIs before the creation of comprehensive documentation. While this approach has its merits in certain scenarios, it often leads to a significant drawback:
 
-console.log(a);
-```
+### Documentation as an Afterthought
 
-## Component
+- **Subpar Documentation Quality:** Documentation derived from debug data in a Code-First approach often lacks the depth and clarity required for good documentation. It tends to be more of a byproduct of the debugging process rather than a well-thought-out guide.
 
-import { useState } from 'react'
+### The Impact of Code-First on API Quality
 
-{/* Import CSS modules */}
-import styles from '../components/counters.module.css'
+- **Limited Scope:** Code-First often results in documentation that only covers aspects of the API that have been tested, leaving out potentially crucial information.
+- **Inconsistency:** Since the focus is on debugging rather than documenting, the resulting documentation can be inconsistent and fragmented.
+- **Delayed Knowledge Sharing:** Documentation created post-debugging delays the sharing of API knowledge, impacting team collaboration and efficiency.
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+## ReAPI's Design-First Alternative
 
-<Counter/>
+- **Holistic Documentation:** ReAPI’s design-first approach ensures that documentation is comprehensive and created with intention, covering all aspects of the API.
+- **Consistent and Collaborative:** By prioritizing documentation, ReAPI fosters consistency and facilitates better collaboration among team members from the start.
+- **Balanced Approach:** While emphasizing documentation, ReAPI also integrates sophisticated debugging tools, offering a balanced and efficient workflow.
 
-## External Component
+### Bridging the Gap for Code-First Teams
 
-import Counters from '../components/counters'
+- **Convenient Tools for Documentation:** Understanding the prevalence of the Code-First approach, ReAPI provides convenient tools to assist teams in creating high-quality documentation directly from their debug data.
+- **AI-Assisted Documentation:** With the help of AI, ReAPI transforms debug data into comprehensive, well-structured documentation, making the process more efficient and effective.
+- **Seamless Integration:** These tools are designed to integrate seamlessly with the debugging process, ensuring that documentation is not compromised.
 
-<Counters />
+### The Importance of Detail and Quality in Public API Documentation
+
+- **Public API Challenges:** When publishing API documentation to the public, the details and quality become significantly more important. Public users won't have the opportunity to ask questions face-to-face, making clear and detailed documentation crucial.
+- **Building Trust and Usability:** High-quality documentation fosters trust and usability, ensuring that external developers can effectively understand and implement your API.
+
+With that being said, ReAPI provides convenient tools to help Code-First teams create good documentation right from their debug data with AI's help, especially crucial when preparing documentation for public release. To learn more about how to leverage these tools effectively, read our 'Using the Debugger' guide.

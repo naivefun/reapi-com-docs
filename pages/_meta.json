@@ -1,6 +1,8 @@
 {
   "index": "Introduction",
-  "another": "Another Page",
+  "another": "Design or Code First",
+  "getStarted": "Get Started",
+  "guide": "Guide",
   "advanced": "Advanced (A Folder)",
   "about": {
     "title": "About",
