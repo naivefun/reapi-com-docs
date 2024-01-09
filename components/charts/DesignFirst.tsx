@@ -16,14 +16,14 @@ export default function DesignFirst(props: DesignFirstProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="font-semibold text-xl">Design First Workflow</div>
-      <p className="text-sm font-normal py-4 px-10">
+      {/* <p className="text-sm font-normal py-4 px-10">
         In the landscape of current API platforms, there's a noticeable trend
         towards a 'Code-First' approach. This methodology prioritizes the
         debugging of APIs before the creation of comprehensive documentation.
         While this approach has its merits in certain scenarios, it often leads
         to a significant drawback.
-      </p>
-      <div style={{ width: 600, height: 460 }}>
+      </p> */}
+      <div className="mt-8" style={{ width: 600, height: 460 }}>
         <ReactFlow
           contentEditable={false}
           zoomOnPinch={false}
@@ -41,8 +41,8 @@ export default function DesignFirst(props: DesignFirstProps) {
               data: {
                 role: "Design Contract",
                 description: "Single source of truth for all stakeholders",
-                className: "border-pink-500 bg-pink-50/50",
-                titleClassName: "border-b-pink-200",
+                className: "border-pink-500 bg-pink-50/50 dark:bg-pink-900",
+                titleClassName: "border-b-pink-500",
               },
             },
             {

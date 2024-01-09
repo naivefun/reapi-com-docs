@@ -1,0 +1,37 @@
+import Wait4Backend from "components/charts/Wait4Backend";
+import DesignFirst from "components/charts/DesignFirst";
+
+# Design-First vs. Code-First
+
+In software development, two primary methodologies dictate the initial phase of a project: code-first and design-first. The code-first approach prioritizes immediate coding, offering flexibility and speed for backend development. However, this can lead to stakeholders waiting for API deployment and rushed iterations due to less detailed documentation. In contrast, the design-first approach involves meticulous planning and documentation before coding begins. This strategy, ideal for complex and large-scale projects, ensures clarity and coordination among all team members from the start. Detailed API contracts and design documents outline clear objectives for each sprint, allowing for a more organized and efficient overall team progress.
+
+#### Code-First and Design-First Workflow Diagram
+
+<div class="border react-flow rounded-lg divide-y mt-6 dark:border-gray-600 dark:divide-gray-600">
+  <div class="p-4 flex justify-center">
+    <Wait4Backend />
+  </div>
+  <div class="p-4 flex justify-center">
+    <DesignFirst />
+  </div>
+</div>
+
+### Comparing Code-First and Design-First
+
+| Aspect                      | Code-First Workflow                                                               | Design-First Workflow                                                               |
+| --------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Definition**              | Developers start by writing code to create the application.                       | The process begins with a comprehensive design phase.                               |
+| **Focus**                   | Immediate implementation and functionality.                                       | Planning, architecture, and design before coding begins.                            |
+| **Documentation**           | Often created after development or generated from the code.                       | Created upfront and is central to the development process.                          |
+| **Flexibility**             | High flexibility in changing features and implementation during development.      | Less flexibility; changes require revisiting the design documents.                  |
+| **Speed**                   | Faster for backend development but can delay overall team progress.               | Slower to start but leads to faster overall team progress due to clear objectives.  |
+| **Stakeholder Involvement** | Limited in early stages; more focused on development team.                        | High from the start, involving various stakeholders in the design process.          |
+| **Quality Assurance**       | More ad-hoc, based on existing code.                                              | Based on predefined specifications and design.                                      |
+| **Maintenance**             | Can be challenging if documentation is not thorough.                              | Easier due to comprehensive documentation and planned architecture.                 |
+| **Scalability**             | Might be an afterthought, adjusted as the project evolves.                        | Considered and integrated into the design from the beginning.                       |
+| **Best Suited For**         | Small projects, prototypes, or when requirements are unclear or rapidly changing. | Large projects, systems requiring high reliability, or when requirements are clear. |
+| **Risk**                    | Higher risk of code refactoring and technical debt.                               | Lower risk of major changes late in the project, but upfront design can be costly.  |
+
+### The ReAPI Approach
+
+ReAPI aligns with the design-first philosophy, offering AI-powered documentation tools and a sharing platform to mitigate some traditional drawbacks of the design-first approach. By facilitating a quick start, enabling rapid creation of documentation, and enhancing flexibility for changes and stakeholder notifications, ReAPI aims to unleash the full potential of the design-first methodology. This integration of advanced tools with the design-first approach helps in balancing thorough planning with the agility needed in modern software development, making it a viable option even for projects that initially adopted a code-first approach but are evolving to require more structured planning and documentation.

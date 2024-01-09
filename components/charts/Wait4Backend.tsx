@@ -16,14 +16,14 @@ export default function Wait4Backend(props: Wait4BackendProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="font-semibold text-xl">Code First Workflow</div>
-      <p className="text-sm font-normal py-4 px-10">
+      {/* <p className="text-sm font-normal py-4 px-10">
         In the landscape of current API platforms, there's a noticeable trend
         towards a 'Code-First' approach. This methodology prioritizes the
         debugging of APIs before the creation of comprehensive documentation.
         While this approach has its merits in certain scenarios, it often leads
         to a significant drawback.
-      </p>
-      <div style={{ width: 600, height: 300 }}>
+      </p> */}
+      <div className="mt-8" style={{ width: 600, height: 300 }}>
         <ReactFlow
           contentEditable={false}
           draggable={false}

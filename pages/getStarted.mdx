@@ -1,66 +1,72 @@
-import { Steps } from "nextra/components";
-import Youtube from "components/Youtube";
+import { Callout, Steps } from "nextra/components";
 
-# Get Started With Your First API
+# Get Started With Your First API Using ReAPI
 
-Welcome to ReAPI! Here’s how you can create your first Rest API and effectively utilize ReAPI's functionalities.
+Welcome to ReAPI! Follow these steps to create your first Rest API and effectively utilize the powerful features of ReAPI.
+
+### Understanding ReAPI's API Organization
+
+Before you begin, familiarize yourself with how ReAPI organizes APIs within a workspace. Here's an example:
+
+<Callout type="info" emoji={null}>
+
+#### 🌐 ReAPI Team Workspace Example
+
+- 📁 ReAPI Open APIs Project
+  - 🛠️ Microservice 1: Public Authentication Service
+    - 🔑 User Login Folder
+    - 📝 User Registration Folder
+    - 🔒 Password Reset Folder
+  - ... (other microservices and folders)
+- 📁 ReAPI Internal APIs Project
+  - 👥 Microservice 1: Internal User Management
+    - 📋 Employee Data Management Folder
+    - 🔐 Internal User Authentication Folder
+  - ... (other microservices and folders)
+
+</Callout>
+
+This structure helps you categorize and manage APIs efficiently, ensuring easy access and coherent navigation.
+
+## Creating Your First Rest API
 
 <Steps>
-### Step 1: Create Your First Rest API Service
+### Step 1: Set Up Your API Service
+- In your workspace, click `Add New Service`.
+- Provide a title and description for your API.
+- Choose `Rest API` as the service type.
+- Click 'Save' to establish your new API service.
 
-After setting up your workspace and project:
+### Step 2: Import or Create API
 
-- Click on `Add New Service`.
-- Enter a title and description for your API.
-- Select `Rest API` as the type.
-- Click 'Save' to create your new Rest API service.
+- To import, click `Export` in the header and upload your existing API spec (OpenAPI, Swagger, or Postman).
+- Alternatively, start from scratch using our pre-defined examples.
 
-<Youtube id="TZl1A48Tsi0" />
+### Step 3: Explore the Sidebar
 
-### Step 2: Import Existing API
+- The **Top Section** lists your APIs by path and title.
+- The **Bottom Section** includes shared components like schemas and parameters.
 
-If you have an existing API specification (OpenAPI, Swagger, or Postman):
+### Step 4: Edit Your API
 
-- Click the `Export` button at the top-center of the header bar.
-- You can also create APIs using our pre-defined examples.
-- The editor's UI will automatically reload after import.
+- Use the main area to adjust paths, operations, components, and settings.
+- Select items from the sidebar to interact with them.
 
-### Step 3: Navigating the Sidebar
+### Step 5: Utilize the Header Bar
 
-The sidebar in the API editor:
+- Access a read view of your current API version.
+- Publish changes or export/import API specs.
 
-- **Top Section**: Displays your APIs, organized by path and title.
-- **Bottom Section**: Contains shared components like schemas, parameters, and formats.
+### Step 6: Share and Export Your API (Optional)
 
-### Step 4: Editing in the Main Area
+- Generate a shared link for collaborative editing.
+- Export your API for integration or external use.
 
-In the main area, you can:
+### Step 7: Make Your API Public (Optional)
 
-- Modify paths, operations, components, and service settings.
-- Interact with items selected from the sidebar.
-
-### Step 5: Using the Header Bar
-
-The header bar provides:
-
-- Read view of the current editing version of your API.
-- Options to publish changes and export/import API specs.
-
-### Step 6: Sharing and Exporting Your API (optional)
-
-After making changes:
-
-- Create a shared link for collaboration.
-- Export your API for integration or documentation.
-
-### Step 7: Making Your API Public (optional)
-
-To share your API publicly:
-
-- Enable the 'Public API' feature in workspace settings.
-- The 'Public API' button will appear in the workspace menu.
-- Copy your Rest API there to make it accessible to the public.
-
-Start building with ReAPI today for a seamless API development and sharing experience.
+- Activate 'Public API' in workspace settings.
+- Use the 'Public API' button in the workspace menu to share your API externally.
 
 </Steps>
+
+Embark on your API development journey with ReAPI for a streamlined and collaborative experience.

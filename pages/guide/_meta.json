@@ -1,3 +1,10 @@
 {
-  "organize": "Organize APIs"
+  "organize": "Organize APIs",
+  "pathOperation": "Path and Operation",
+  "schemaEditor": "Schema Editor",
+  "components": "Components",
+  "sharing": "Share and Export",
+  "publicApi": "Public API",
+  "debugger": "Use Debugger",
+  "apiTesting": "API Testing"
 }

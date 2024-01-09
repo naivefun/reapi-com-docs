@@ -1,9 +1,11 @@
 {
   "index": "Introduction",
-  "another": "Design or Code First",
+  "designOrCodeFirst": "Design or Code First",
   "getStarted": "Get Started",
   "guide": "Guide",
-  "advanced": "Advanced (A Folder)",
+  "aiIntegration": "AI Integration",
+  "comparison": "Comparison",
+  "faq": "FAQ",
   "about": {
     "title": "About",
     "type": "page"
