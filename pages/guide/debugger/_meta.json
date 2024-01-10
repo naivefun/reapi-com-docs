@@ -1,5 +1,7 @@
 {
   "overview": "Overview",
+  "extension": "Install Chrome Extension",
   "env": "Environment Management",
+  "dynamic": "Dynamic Varibles",
   "handleErrors": "Handle Errors"
 }

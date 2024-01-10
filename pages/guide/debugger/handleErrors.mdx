@@ -1,0 +1,30 @@
+# Handling Errors in the ReAPI Debugger
+
+When using the ReAPI debugger, encountering errors during API request and response cycles is not uncommon. Understanding how to diagnose and resolve these errors is crucial for efficient debugging. Here are some common issues and how to address them:
+
+### 1. Request Failed to Send
+
+If a request fails to send, the response header bar will not show a status code. This usually indicates a network error, which could be due to:
+
+- **Server Unreachability**: The server you are trying to reach is not responding or is down.
+- **CORS Limitation**: Diagnose this in the Chrome Developer Tools. Check the 'Network' tab and the 'Issues' list for any CORS-related errors. Installing the ReAPI Chrome extension can help resolve these issues.
+- **Inherited Authorization Issue**: Some APIs require no authorization, but if the request inherits global authorization settings, it might fail to bypass CORS, even with the extension enabled. In such cases, disabling authorization at the request level is necessary.
+
+### 2. Incomplete or Erroneous Configuration
+
+If the configuration of your request is incomplete or contains errors, consider the following checks:
+
+- **Server Configuration**: Ensure that the server is correctly configured and selected in your environment settings.
+- **Authorization Setup**: Verify that the authorization method is properly configured and selected.
+- **Variable Group Usage**: If you are using variable groups in your server, authorization, parameters, or request body, make sure the appropriate variable group is configured and selected.
+
+### Key Features to Assist in Error Handling
+
+ReAPI provides two key features to help diagnose and address issues:
+
+1.  **Preview Button**: Located on the header bar, the preview button allows you to view the resolved request. This can help you determine if the request is being sent as intended.
+2.  **Error Report**: In the response section, if there are errors, the 'Error Report' tab will detail all the issues, such as an undefined variable in a parameter reference.
+
+### Seeking Further Assistance
+
+If you encounter issues that are not easily diagnosed using the above methods, please visit [ReAPI Issues](https://github.com/ReAPI-com/reapi-issues) to submit your issues. Our team is ready to assist and provide the necessary support to resolve your debugging challenges.
