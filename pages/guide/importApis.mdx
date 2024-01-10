@@ -1,0 +1,24 @@
+# Import APIs Guide in ReAPI
+
+ReAPI offers a flexible and efficient way to import API specifications, supporting various formats including OpenAPI 3, Swagger, and Postman files. Understanding the import and merge options in ReAPI is crucial for integrating external API specifications into your projects.
+
+### Import Modes: Import vs. Merge
+
+1. **Import Mode**:
+
+   - **Complete Replacement**: When you choose to import a specification, it will completely replace the existing service settings, paths, and components in your project with those from the new specification.
+   - **Use Case**: Import mode is ideal when you want to start fresh with a new specification, removing all previous configurations and elements from the service.
+
+2. **Merge Mode**:
+   - **Selective Addition**: In contrast, merge mode preserves your existing service settings and only adds new paths and components from the imported specification. Existing content remains intact.
+   - **Use Case**: Merge mode is useful when you want to expand an existing service with additional features or paths without altering what you have already built.
+
+### Practical Scenario: Using AI to Generate and Merge Specs
+
+- **Fast CRUD Creation**: You can use ReAPI's AI capabilities to generate a new specification, particularly for creating CRUD (Create, Read, Update, Delete) operations quickly.
+- **Merging with Existing Services**: After generating the spec, you can merge it into an existing service, enhancing your API with new functionalities while keeping the current setup unchanged.
+
+### Important Considerations for Postman Collections
+
+- **Completeness of Documentation**: When importing from Postman collections, be aware that many collections may lack response data, resulting in incomplete documentation in ReAPI.
+- **Requirement for Proper Examples**: To ensure that the imported documentation includes proper response structures, the Postman collection should contain well-defined examples. Only collections with these examples can generate comprehensive response documentation in ReAPI.
