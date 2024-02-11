@@ -8,5 +8,5 @@
   "sharing": "Share and Export",
   "publicApi": "Public API",
   "debugger": "Use Debugger",
-  "apiTesting": "API Testing"
+  "autoTesting": "Auto Testing"
 }
