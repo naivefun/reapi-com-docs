@@ -1,0 +1,129 @@
+# JSONata Expression
+
+- Official JSONata Documentation: https://docs.jsonata.org/overview.html
+- Playground: https://try.jsonata.org/
+
+### The Importance of JSONata in ReAPI
+
+JSONata is a powerful query and transformation language for JSON data, playing a crucial role in ReAPI, especially for users looking to leverage its auto-testing capabilities:
+
+1. **Efficient Data Extraction:** In ReAPI, JSONata is essential for extracting data from API responses or contextual information. Its ability to navigate and manipulate complex JSON structures enables precise data retrieval, critical for effective testing and validation.
+
+2. **Dynamic Condition Evaluation:** JSONata's utility extends to evaluating conditions within 'if' statements and loops in testing scenarios. This feature allows for the creation of dynamic and adaptable auto-tests, incorporating conditional logic to handle varying data during test execution.
+
+Mastering JSONata is key for those aiming to fully utilize ReAPI Auto Testing. Its capabilities in data extraction and condition evaluation are indispensable for developing sophisticated and flexible test cases, making it a vital tool in the ReAPI suite.
+
+Certainly! Here's a concise section on "Data Extraction" tailored for your user guide, highlighting key points about using JSONata for data extraction, including handling literal values, property access, and arrays.
+
+## Data Extraction with JSONata
+
+Extracting data efficiently is a cornerstone of leveraging JSONata within ReAPI. Understanding how to correctly use JSONata expressions can significantly enhance your data manipulation capabilities. Here are some fundamental concepts to keep in mind:
+
+#### Literal String Values (Watch Out!)
+
+**A common mistake** is attempting to assign constant string values without enclosing them in quotes. Without quotes, JSONata interprets the input as an extraction expression, often leading to errors. Always enclose literal string values in quotes to ensure they are recognized correctly. For example, use **`"Hello World"`** instead of `Hello World`.
+
+#### Other Literal Expressions
+
+JSONata supports various literal expressions directly, including boolean values (`true`, `false`) and numbers (e.g., `1.23`). These literals are recognized and processed by JSONata without the need for additional syntax.
+
+#### Basic Property Access
+
+Accessing properties within JSON data is straightforward with JSONata. For simple properties, use the dot notation, such as `user.id` for accessing the `id` property of a `user` object. If a property name includes special characters or spaces, enclose the property name in backticks, e.g., `` user.`user name`  ``.
+
+#### Working with Arrays
+
+JSONata excels at handling arrays, offering a variety of ways to access and manipulate array data. Here are a few examples:
+
+- **Accessing an Array Element:** To access a specific element, use the index in square brackets, e.g., `users[0]` for the first element of the `users` array.
+- **Filtering:** You can filter arrays based on conditions, e.g., `users[name="John"]` to find users with the name "John".
+- **Mapping:** Apply a transformation to each element, e.g., `users[].name` to extract an array of names from the `users` array.
+
+Understanding these basic principles of data extraction with JSONata will empower you to perform more effective and precise data manipulation, enhancing your use of ReAPI's auto-testing features.
+
+Certainly! Here's a section on expressing conditions with JSONata, complete with examples to evaluate boolean results. This will cover basic comparison operations such as equality, greater than, and less than.
+
+## Expressing Conditions with JSONata
+
+JSONata provides a powerful syntax for expressing conditions, enabling users to evaluate boolean results based on comparisons within their data. Understanding how to construct these expressions is key to leveraging the full potential of JSONata for dynamic data manipulation and testing in ReAPI. Here are some fundamental comparison operations:
+
+#### Equality (`=`)
+
+To check if two values are equal, use the `=` operator. JSONata treats this comparison as a boolean expression that returns `true` or `false`.
+
+- **Example:** `age = 30` checks if the `age` property is equal to 30.
+
+#### Greater Than (`>`)
+
+Use the `>` operator to determine if one value is greater than another, useful for numeric comparisons.
+
+- **Example:** `salary > 50000` evaluates if the `salary` property is greater than 50,000.
+
+#### Less Than (`<`)
+
+Similarly, the `<` operator checks if one value is less than another, also primarily used for numeric data.
+
+- **Example:** `temperature < 20` checks if the `temperature` property is less than 20.
+
+#### Greater Than or Equal To (`>=`)
+
+This operator combines greater than and equality checks, evaluating to `true` if the first value is greater than or equal to the second.
+
+- **Example:** `score >= 75` evaluates if the `score` property is 75 or higher.
+
+#### Less Than or Equal To (`<=`)
+
+Opposite to the above, this operator checks if a value is less than or equal to another.
+
+- **Example:** `stock <= 100` checks if the `stock` property is 100 or fewer.
+
+#### Combining Conditions
+
+JSONata allows for the logical combination of conditions using `and` (`and`) and `or` (`or`) operators, enabling more complex expressions.
+
+- **Example:** `age > 18 and age < 65` checks if the `age` property is between 18 and 65.
+- **Example:** `status = 'active' or balance > 0` evaluates if the status is 'active' or the balance is greater than 0.
+
+Mastering these conditional expressions in JSONata can significantly enhance your data querying and manipulation capabilities within ReAPI, allowing for more precise and dynamic data handling in auto-testing scenarios.
+
+## JSONata in ReAPI Auto Testing
+
+In ReAPI Auto Testing, JSONata expressions play a pivotal role in enhancing the flexibility and power of your tests. Understanding how to effectively use JSONata against different types of data sources—namely, context and response—is crucial for crafting precise and dynamic test scenarios. Here's how JSONata integrates into the ReAPI testing framework:
+
+#### Data Sources: Context and Response
+
+JSONata expressions in ReAPI are primarily used against two types of data sources: the context and the response.
+
+- **Context:** This is a persistent data store available across the entire testing tree, making it invaluable for maintaining state or passing data between steps in your tests. When writing conditions for nodes like 'if' and 'loop', or when you need to reference data across multiple API calls, you'll use expressions against the `context`. For example, to check if a context variable `id` equals "id1", you would use `context.id = "id1"`.
+
+- **Response:** After an API step, you can manipulate or assert against the API response. This is where you'll use JSONata to extract or evaluate data directly from the API's response. For instance, to assert that the response status is 200, you would write `response.status = 200`.
+
+#### Utilizing Context in Your Tests
+
+The context object is a powerful feature for creating cohesive and stateful tests. It allows you to carry forward information from one step to the next, enabling complex scenarios that depend on previous outcomes. For example, you might save a user ID from a creation API response to the context and use it in subsequent requests or conditions.
+
+#### Extracting and Asserting Response Data
+
+In API testing steps, JSONata expressions are crucial for both asserting expected outcomes and for extracting data from responses to use in later steps. Whether you're verifying the success of an operation or pulling specific values from a response, JSONata provides the syntax to do so succinctly and effectively.
+
+#### JSONata Input Control and Data Source Reference
+
+ReAPI enhances the usability of JSONata through a user-friendly interface. The JSONata input control within the ReAPI platform displays available data sources at the top right corner. This feature is designed to help you quickly understand which data sources are at your disposal and to assist in crafting your expressions accurately. By clicking on the indicated area, you can access more details about the data sources, including their structure and available fields, facilitating more informed and precise JSONata expressions.
+
+#### JSONata Input Control and Feedback Mechanism
+
+The JSONata input control within the ReAPI platform not only displays available data sources but also provides immediate visual feedback on the potential validity of your expressions through a color-coded system:
+
+- **<span className="text-purple-500">Default State</span>:** By default, the input
+  control appears in a <span className="text-purple-500">**violet**</span> color,
+  indicating that you're in the process of crafting or have entered a standard expression.
+
+- **<span className="text-orange-500">Warning State</span>:** If the platform detects something in your expression that might be invalid or warrants a second look, the input control's color changes to <span className='text-orange-500'>**orange**</span>. This serves as a hint that there may be issues with the expression you've entered.
+
+It's important to note that this color change to orange is not always a definitive indicator of an error but rather a prompt to review your expression. The warning color is designed to encourage a closer examination of your JSONata expression, ensuring that it accurately reflects your intended logic and data manipulation goals.
+
+When you see the orange input color, take a moment to double-check your expression for potential syntax issues, logical errors, or mismatches with the data structure you're targeting. This feature is part of ReAPI's commitment to enhancing user experience and aiding in the development of effective and error-free auto tests.
+
+Remember, the visual feedback provided by the JSONata input control is a helpful guide, but your detailed review and understanding of the expression's logic and its alignment with the data structures at play are crucial for ensuring the success of your testing scenarios.
+
+Incorporating JSONata expressions into your ReAPI Auto Testing workflows allows for a high degree of customization and precision. By mastering the use of JSONata against both context and response data, you can unlock the full potential of ReAPI's testing capabilities, creating more robust, dynamic, and effective tests.
