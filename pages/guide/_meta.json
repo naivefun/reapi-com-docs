@@ -7,6 +7,6 @@
   "versions": "Version Management",
   "sharing": "Share and Export",
   "publicApi": "Public API",
-  "debugger": "Use Debugger",
-  "autoTesting": "Auto Testing"
+  "autoTesting": "Auto Testing",
+  "debugger": "Use Debugger"
 }
