@@ -1,0 +1,36 @@
+# Getting Started with ReAPI's API Testing
+
+Before diving into the creation and execution of your API tests with ReAPI, there are two important prerequisites to ensure a smooth and efficient testing process:
+
+### Prerequisites
+
+1. **Install the ReAPI Chrome Extension:** To debug test cases and runners directly in your browser, overcoming CORS limitations, it's essential to install the ReAPI Chrome Extension. This tool facilitates seamless interaction between your local testing environment and the ReAPI platform. [Learn more](/guide/debugger/extension).
+
+2. **Familiarize Yourself with JSONata:** ReAPI tests leverage JSONata for assertion and context operations within test cases. While our platform is designed to minimize the need for coding skills, a basic understanding of JSONata is necessary to fully utilize its capabilities. [Learn more about JSONata](/guide/autoTesting/jsonata).
+
+With these prerequisites in place, you're ready to start using ReAPI's API testing module effectively. Follow the steps below to create, organize, and execute your API tests:
+
+### 1. Create Test Cases with the Test Case Editor
+
+- **Start Simple or Go Complex:** Use our intuitive test case editor to create your test cases, from straightforward API calls with assertions to complex scenarios involving multiple API calls and logic flows. The user interface is optimized for easy debugging.
+
+### 2. Organize and Select Test Cases with the Test Runner
+
+- **Flexible Selection:** Organize and select the test cases you wish to execute using the test runner. Our system supports tagging for easy grouping and selection, and you can incorporate logic flows into the runner as needed.
+
+### 3. Execute Tests Locally or in the Cloud
+
+- **Local Execution:** Download the configuration and run tests on your own server if your runner performs well in your browser.
+- **Cloud Execution:** For hassle-free testing, run your tests on our cloud runner by creating a test deployment from your ready runner. Deployments have a fixed environment, ideal for final testing phases.
+
+### 4. Schedule Your Test Executions
+
+- **Flexible Scheduling:** Schedule your tests to run exactly when you need them, using our scheduler powered by AWS EventBridge. Supports one-time, rate-based, or cron-based schedules. [Learn more about EventBridge schedule types](https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html).
+
+### 5. Review Detailed Test Reports
+
+- **Comprehensive Reporting:** Receive detailed reports for each test execution, including execution states and summaries. Set up email notifications in your project settings for immediate alerts.
+
+### Next Steps
+
+Explore each module in depth to maximize the benefits of ReAPI's API testing capabilities. A thorough understanding of the test case editor, test runner, cloud runner, and scheduling features will enhance your API testing strategy for greater efficiency and effectiveness.
