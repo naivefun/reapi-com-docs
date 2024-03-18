@@ -1,0 +1,90 @@
+# Implementing Iteration and Mixins in Test Case Design
+
+Enhance your test case designs with iteration steps, data sources, and mixins. This guide dives deeper into these features, providing examples to help you understand their application for dynamic and efficient testing.
+
+## Iteration Step
+
+Iteration steps allow for repetitive execution of test steps over a data collection, ideal for API testing across different data sets.
+
+### Data Sources
+
+Data for iteration can be sourced in two ways:
+
+1. **Inline Data Source**: Define an array of data directly within your test configuration.
+2. **JSONata Expression**: Extract data from the context or predefined fixtures using a JSONata expression. Ensure the source is an array.
+
+### Configuration
+
+Specify a variable name (e.g., 'item', 'order') to access items within the iteration. This variable is assigned to the context as `{value: actualValue, index: indexOfItem}`. Choose a unique variable name to avoid context conflicts.
+
+### Accessing Iterated Items
+
+- **In API Nodes**: Directly use iterated items without the 'context.' prefix for parameters and request body.
+
+```yaml
+# pseudo code
+parameter: "{{item.value}}"
+```
+
+- **In Context Operations or Assertions**: Use 'context.' prefix.
+
+```yaml
+# pseudo code
+assertion: "context.item.value == expectedValue"
+```
+
+## Mixins
+
+Mixins facilitate object reuse and property overwriting within your test cases, ideal for nested objects and partial entity updates.
+
+### Usage Examples
+
+- **Including Iterated Item in Request Body**:
+
+```json
+{
+  "__mixin__": "{{order.value}}",
+  "orderName": "new name"
+}
+```
+
+This example demonstrates how to spread `order.value` into the current object, explicitly setting `orderName` to a new value.
+
+- **Partial Entity Update**:
+
+First, load the entity into the context. Then, use a mixin in the subsequent API request to include the entity, overwriting only the desired properties.
+
+```json
+// Assuming the entity is already loaded into context as `entity`
+{
+  "__mixin__": "{{entity}}",
+  "propertyNameToUpdate": "newValue"
+}
+```
+
+### Advantages
+
+- **Nested Object Support**: Mixins can be utilized within nested objects for flexible data structuring.
+
+```json
+{
+  "nestedObject": {
+    "__mixin__": "{{someContextObject}}",
+    "specificProperty": "overwrittenValue"
+  }
+}
+```
+
+- **Partial Updates**: Simplify testing of entity updates by reusing the entity object and modifying only specific properties.
+
+```json
+// Load the entity into context, then:
+{
+  "__mixin__": "{{entity}}",
+  "updatedProperty": "updatedValue"
+}
+```
+
+## Conclusion
+
+Leveraging iteration steps, data sources, and mixins in your test case design promotes dynamic, efficient, and scalable testing. The examples provided illustrate how these features can be applied to enhance your testing processes, making them more flexible and maintainable.
