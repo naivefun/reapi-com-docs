@@ -1,0 +1,68 @@
+# Iteration Node
+
+## Overview
+
+The Iteration node in ReAPI allows you to iterate over a list of values and execute a set of steps for each value. This is particularly useful for scenarios where you need to perform the same actions on multiple items, such as a list of user IDs or a collection of data entries.
+
+### Why Iteration Node is Useful
+
+The Iteration node is useful for several reasons:
+
+1. **Batch Processing**: Perform actions on multiple items in a dataset sequentially.
+2. **Data-Driven Testing**: Execute test steps for different data inputs, enhancing test coverage.
+3. **Automation Efficiency**: Reduce redundancy by automating repetitive tasks over a list of items.
+
+### Examples
+
+1. **User ID Processing**:
+
+   - **Use Case**: Iterate over a list of user IDs to validate their profiles.
+   - **Configuration**: Use a list of user IDs as the value source and process each user ID in the iteration.
+
+2. **Batch Data Validation**:
+   - **Use Case**: Validate multiple data entries in a batch process.
+   - **Configuration**: Use a JSON array of data entries as the value source and validate each entry in the iteration.
+
+### Configurable Options in ReAPI Iteration Node
+
+In ReAPI, the Iteration node has two configurable options:
+
+1. **Value Source**:
+
+   - **Inline Values**: Must be an array of data, such as a list of user IDs.
+     - **Example**: `["user1", "user2", "user3"]`
+   - **Jsonata Expression**: Read from a context value, which must also be an array or it will result in an error.
+     - **Example**: `context.userIds` where `userIds` is an array stored in the context.
+
+2. **Context Key**:
+   - **Description**: A key is required to access the current value or index during the iteration.
+   - **Usage**: `key.value` for the current value and `key.index` for the current index.
+     - **Example**:
+       - **Accessing Value**: `context.key.value` to get the current user ID.
+       - **Accessing Index**: `context.key.index` to get the current index of the iteration.
+
+### Example Configuration
+
+**User ID Processing Example**:
+
+```json
+{
+  "valueSource": ["user1", "user2", "user3"],
+  "contextKey": "currentUserId"
+}
+```
+
+- **In the Iteration**: Use `context.currentUserId.value` to access the current user ID.
+
+**Batch Data Validation Example**:
+
+```json
+{
+  "valueSource": "context.dataEntries",
+  "contextKey": "currentEntry"
+}
+```
+
+- **In the Iteration**: Use `context.currentEntry.value` to access the current data entry and `context.currentEntry.index` to access the current index.
+
+By using the Iteration node effectively, you can streamline your test cases and automate repetitive tasks, making your API testing more efficient and comprehensive.

@@ -1,0 +1,52 @@
+# Overview
+
+## ReAPI's Test Case Designer
+
+ReAPI's test case designer is structured as a tree, allowing for complex and dynamic test scenarios. By using nodes such as If, Loop, and others, you can create sophisticated tests that handle a wide range of conditions and workflows.
+
+### Importance of Good Titles and Descriptions
+
+It's crucial to give each step in your test case a clear and descriptive title. This helps maintain clarity and makes it easier for anyone reviewing or maintaining the test cases to understand the purpose of each step. When necessary, add descriptions to provide additional context and specify assertion targets.
+
+### Examples
+
+1. **User Login Flow**:
+
+   - **Title**: "User Login"
+   - **Description**: "This step handles user login and checks the response for a valid session token."
+
+2. **Check User Role**:
+
+   - **Title**: "Check User Role"
+   - **Description**: "Verify the user's role is 'admin' and proceed with admin-specific tests."
+
+3. **Poll for Job Completion**:
+
+   - **Title**: "Poll Job Status"
+   - **Description**: "Poll the job status every 10 seconds until it completes or times out."
+
+4. **List Posts and Ensure Non-Empty**:
+
+   - **Title**: "List Posts"
+   - **Description**: "Fetch the list of posts and ensure the response contains a non-empty list of posts."
+
+5. **Validate User Profile**:
+   - **Title**: "Validate Profile"
+   - **Description**: "Retrieve and validate the user profile to ensure it contains all required fields."
+
+### Node Types
+
+ReAPI's test case designer supports a growing variety of node types, including:
+
+- **API Node**: For making HTTP requests and performing assertions.
+- **Sequence Node**: To group steps logically and execute them sequentially.
+- **If Node**: For branching logic based on conditions.
+- **Loop Node**: For repeating steps multiple times with configurable options.
+- **Iteration Node**: For iterating over a list of values and performing actions on each.
+- **Reference Node**: For reusing or cloning existing test cases.
+- **Selector Node**: For selecting test cases by tags, folders, and priorities in the test runner.
+- **Wait Node**: For introducing delays between steps.
+- **Context Node**: For preparing and manipulating context data.
+
+By leveraging these node types and maintaining clear titles and descriptions, you can create powerful and maintainable test cases that effectively validate your APIs.
+ 

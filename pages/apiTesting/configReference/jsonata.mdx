@@ -1,0 +1,59 @@
+# Jsonata Expression
+
+## Overview
+
+Jsonata is widely used in ReAPI's testing platform for its powerful and flexible capabilities in handling JSON data. Unlike simple JSON path expressions, Jsonata offers advanced functionality for querying, transforming, and manipulating JSON data, making it an essential tool for complex API testing scenarios.
+
+### Where Jsonata Can Be Used
+
+Jsonata expressions can be used in various parts of ReAPI's testing platform, including:
+
+1. **API Node**:
+   - **Context Operations**: Extract and transform response data.
+   - **Assertions**: Define both actual and expected values.
+2. **Context Node**:
+   - **Data Preparation**: Generate or manipulate data before executing further steps.
+3. **If Node**:
+   - **Conditions**: Evaluate conditions to determine the next steps in the test flow.
+4. **Loop Node**:
+   - **Break Conditions**: Specify conditions to exit the loop.
+5. **Iteration Node**:
+   - **Value Source**: Define the array of values to iterate over.
+
+### Why Jsonata is Powerful
+
+Jsonata is more powerful than simple JSON path expressions for several reasons:
+
+1. **Transformations**: Jsonata allows you to perform complex transformations on JSON data. You can map, filter, and reduce data structures in a concise and readable way.
+2. **Functions**: Jsonata includes a rich set of built-in functions for string manipulation, mathematical operations, date handling, and more, which can be combined to create sophisticated expressions.
+3. **Dynamic Evaluation**: Jsonata can dynamically evaluate expressions based on the input data, enabling flexible and context-sensitive queries.
+4. **Pattern Matching**: Jsonata supports pattern matching and regular expressions, allowing you to perform advanced searches and replacements within JSON data.
+
+### Example Use Cases
+
+1. **Extracting Data**:
+
+   - **Expression**: `response.data.posts[0].title`
+   - **Use Case**: Extract the title of the first post from the response.
+
+2. **Filtering Data**:
+
+   - **Expression**: `response.data.posts[author='John Doe']`
+   - **Use Case**: Filter posts by a specific author.
+
+3. **Aggregating Data**:
+
+   - **Expression**: `$sum(response.data.orders[].totalAmount)`
+   - **Use Case**: Calculate the total amount of all orders.
+
+4. **Transforming Data**:
+   - **Expression**: `response.data.users.{ "fullName": firstName & ' ' & lastName, "email": email.toLowerCase() }`
+   - **Use Case**: Transform user data to include full names and lowercase emails.
+
+### Playground and Documentation
+
+- **Local Playground**: You can try playing with Jsonata expressions on our [local playground](http://local.reapi.io:3000/playground/jsonata).
+- **Official Documentation**: Refer to the [official Jsonata documentation](https://jsonata.org/) for detailed information.
+- **Official Playground**: Experiment with Jsonata expressions on the [official Jsonata playground](https://try.jsonata.org/).
+
+By leveraging Jsonata expressions in ReAPI's testing platform, you can perform advanced data manipulations and validations, making your API tests more robust and comprehensive.

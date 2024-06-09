@@ -1,0 +1,13 @@
+{
+  "overview": "Overview",
+  "jsonata": "JSONata Expression",
+  "api": "API Node",
+  "context": "Context Node",
+  "wait": "Wait Node",
+  "sequence": "Sequence Node",
+  "if": "If Node",
+  "loop": "Loop Node",
+  "iteration": "Iteration Node",
+  "ref": "Reference Node",
+  "selector": "Selector Node"
+}

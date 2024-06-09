@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+body, html {
+  font-size: 15px;
+}
+
 .react-flow .react-flow__panel {
   background-color: transparent;
   font-size: 0.55rem;
+}
+
+table {
+  font-size: 13px;
+}
+
+li > ul {
+  margin-top: 0.35rem !important;
 }

@@ -1,0 +1,55 @@
+# Context Node
+
+## Overview
+
+The context node in ReAPI is designed for standalone context operations that do not require response data. This is particularly useful when you need to prepare data before making any API requests or perform operations that are independent of the API responses.
+
+For detailed information on context operations, refer to [Context Operations](https://www.reapi.com/apiTesting/configReference/api#context-operations).
+
+## Why Standalone Context Operations are Needed
+
+Standalone context operations are essential for several reasons:
+
+1. **Data Preparation**: Sometimes, you need to prepare data that is not derived from an API response. This could include generating timestamps, creating random values, or setting default variables that will be used in subsequent steps.
+2. **Independent Operations**: There are scenarios where you need to perform operations that do not depend on the outcome of an API call. Context nodes allow you to execute these operations independently.
+3. **Workflow Control**: Using context nodes helps in structuring the test workflow by segregating data preparation and API interaction steps, making the tests more readable and maintainable.
+
+## Examples of Standalone Context Operations
+
+1. **Generate a Timestamp**:
+   - **Use Case**: You need a current timestamp for logging or as part of the request payload.
+   - **Operation**: Use the `timestamp()` function to generate and set the current time.
+   - **Example**: 
+     ```json
+     {
+       "operation": "set",
+       "variable": "currentTimestamp",
+       "value": "currentTimestamp"
+     }
+     ```
+
+2. **Create a Random User ID**:
+   - **Use Case**: You need a unique user ID for testing user creation endpoints.
+   - **Operation**: Use the faker.js function to generate a random user ID.
+   - **Example**: 
+     ```json
+     {
+       "operation": "set",
+       "variable": "randomUserId",
+       "value": "faker.random.uuid"
+     }
+     ```
+
+3. **Set Default Values**:
+   - **Use Case**: You want to set default values for certain variables that will be used throughout the test.
+   - **Operation**: Set default values for variables.
+   - **Example**: 
+     ```json
+     {
+       "operation": "set",
+       "variable": "defaultUserRole",
+       "value": "guest"
+     }
+     ```
+
+By using context nodes for standalone context operations, you can ensure that your test cases are well-prepared and structured, leading to more efficient and effective API testing.

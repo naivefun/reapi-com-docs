@@ -1,0 +1,41 @@
+# Wait Node
+
+## Overview
+
+The wait node in ReAPI is used to pause the execution of your test case for a specified period. You can configure the wait time for up to 300 seconds. This is useful in scenarios where you need to delay the next steps to allow time for certain processes to complete.
+
+## Why Wait Node is Useful
+
+The wait node is particularly useful in the following scenarios:
+
+1. **Asynchronous Operations**: When testing APIs that trigger asynchronous operations, you might need to wait for the operations to complete before making subsequent API calls.
+2. **Rate Limiting**: If you need to respect rate limits set by the API provider, a wait node can help manage the timing of your requests to avoid hitting those limits.
+3. **System Stabilization**: In some cases, after deploying changes or restarting a service, you might need to wait for the system to stabilize before continuing with further tests.
+
+## Examples
+
+1. **Wait for Asynchronous Processing**:
+   - **Use Case**: After triggering a background job, you need to wait for a certain period before checking the job status.
+   - **Configuration**: Set the wait node to pause for 60 seconds.
+
+2. **Respect Rate Limits**:
+   - **Use Case**: To avoid exceeding API rate limits, insert wait nodes between API calls.
+   - **Configuration**: Set the wait node to pause for 30 seconds between requests.
+
+3. **System Stabilization**:
+   - **Use Case**: After deploying new code or restarting a service, wait for the system to stabilize.
+   - **Configuration**: Set the wait node to pause for 120 seconds.
+
+### Better Control with Loop Node
+
+For more efficient control, consider using the loop node instead of the wait node. The loop node allows you to poll at shorter intervals and exit based on certain conditions. This approach is more efficient as it reduces unnecessary waiting time.
+
+**Example with Loop Node**:
+- **Polling Scenario**: Check the status of a job every 10 seconds and exit the loop once the job is complete.
+- **Configuration**:
+  - **Loop Node**: Set to iterate every 10 seconds.
+  - **Condition**: Exit the loop when the job status is "complete".
+
+By using the loop node, you can achieve better control and efficiency in your test cases, ensuring timely execution without unnecessary delays.
+
+By leveraging the wait node and loop node appropriately, you can manage the timing and flow of your tests more effectively, leading to more reliable and accurate results.

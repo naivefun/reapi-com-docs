@@ -1,0 +1,78 @@
+# Loop Node
+
+## Overview
+
+The Loop node in ReAPI is a powerful tool that allows you to repeat a set of steps multiple times. This is particularly useful for scenarios where you need to perform repetitive actions, such as polling an API, iterating over a list of data, or testing multiple conditions.
+
+### Why Loop Node is Useful
+
+The Loop node is useful for several reasons:
+
+1. **Polling**: Repeatedly check the status of an asynchronous operation until it completes.
+2. **Iterative Testing**: Test the same set of steps with different data inputs, such as different user credentials or API parameters.
+3. **Data Processing**: Process multiple items in a dataset by iterating through them.
+
+### Examples
+
+1. **Polling an API**:
+
+   - **Use Case**: Poll an API every 10 seconds until a specific condition is met.
+   - **Configuration**: Set the delay to 10 seconds and specify a break condition.
+
+2. **Iterate Over Data**:
+
+   - **Use Case**: Iterate over a list of user IDs and perform a set of actions for each user.
+   - **Configuration**: Use the context key to access the current index and data in each iteration.
+
+3. **Data Processing**:
+   - **Use Case**: Process a batch of data items one by one.
+   - **Configuration**: Set the repeat times to the number of items and use the context key to access each item in the list.
+
+### Configurable Options in ReAPI Loop Node
+
+In ReAPI, the Loop node has four configurable options:
+
+1. **Repeat Times**:
+
+   - **Description**: The number of times to repeat the loop.
+   - **Example**: Set to 5 to repeat the steps 5 times.
+
+2. **Break Condition (Optional)**:
+
+   - **Description**: A condition that, if met, will exit the loop early.
+   - **Example**: `context.jobStatus = 'completed'` to exit the loop when the job is done.
+
+3. **Delay (in seconds)**:
+
+   - **Description**: The delay between each iteration of the loop.
+   - **Example**: Set to 10 to wait 10 seconds between iterations.
+
+4. **Context Key (Optional)**:
+   - **Description**: A key to store the current index of the loop iteration in the context.
+   - **Usage**: `key.index` can access the current index if required in the loop.
+   - **Example**: Use `context.key.index` in API requests to iterate over a list of items.
+
+### Example Configuration
+
+**Polling Example**:
+
+```json
+{
+  "repeatTimes": 10,
+  "breakCondition": "context.jobStatus = 'completed'",
+  "delay": 10,
+  "contextKey": "pollIndex"
+}
+```
+
+**Iterative Testing Example**:
+
+```json
+{
+  "repeatTimes": 5,
+  "delay": 2,
+  "contextKey": "iterationIndex"
+}
+```
+
+By using the Loop node effectively, you can create more dynamic and robust test cases that handle repetitive tasks efficiently. This enhances the flexibility and power of your API testing workflows.

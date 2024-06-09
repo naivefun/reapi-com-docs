@@ -1,0 +1,244 @@
+import { Steps } from "nextra/components";
+
+# Quick Start with ReAPI API Testing
+
+## Introduction
+
+In this Quick Start guide, we will walk you through the process of setting up and running your first API tests using ReAPI. We'll skip complex environment setups and use the simple [JSONPlaceholder Posts API](https://jsonplaceholder.typicode.com/) as our test subject. By the end of this guide, you will have:
+
+1. Created test cases to list posts and get a specific post.
+2. Asserted that the posts are loaded correctly.
+3. Created a test runner to include these test cases.
+4. Deployed the test runner to execute every hour.
+
+Let's get started!
+
+## Pre-Steps Before You Start
+
+1. **Install Chrome Extension**: Make sure the ReAPI Chrome Extension is installed from the Chrome Web Store.
+2. **Log In and Set Up Workspace**:
+   - **Log In**: Log in to your ReAPI account.
+   - **Create Workspace**: Create a new workspace if you don't have one already.
+   - **Create Project**: Within your workspace, create a new project.
+   - **Enter Test Module**: In your project, click on "Testing" to enter the test module.
+   - **Navigate to Test Cases**: Go to the "Test Cases" page to start creating your tests.
+
+<Steps>
+
+### Step 1: Create Test Cases
+
+#### Organize Your Test Cases
+
+1. **Create a Folder**: Start by organizing your test cases. Create a new folder named "Post Tests".
+   - Navigate to the "Test Cases" page.
+   - Click on "New Folder" and name it "Post Tests".
+
+#### Create the 'List Posts' Test Case
+
+1. **New Test Case**: Within the "Post Tests" folder, click on "New Test Case" and name it "List Posts".
+
+#### Configure the Test Case
+
+1. **Test Case Editor**: In the test case editor page, you will see a tree-shaped editor with a root node labeled "Start".
+2. **Add API Node**:
+   - Click on "Add Next Step" under the "Start" node.
+   - Select "API Node" from the options. This will add a new node under the "Start" node, which is of type "API" and colored orange.
+
+#### Set Up the API Node
+
+1. **Title the Node**: Give the new node a title, such as "List posts and ensure the result is an array".
+2. **Configure the API Call**:
+   - Click on the node type (API). This will open the configuration pane at the bottom of the page.
+   - **URL**: Input the URL `https://jsonplaceholder.typicode.com/posts`.
+3. **Run the API Call**:
+   - Click the "Run" button located at the top left corner of the page. This will execute the API call immediately.
+   - The execution state will be displayed along with the tree nodes.
+   - Click on "Open details view" to view the API response data.
+
+#### Add Assertions
+
+1. **Assertions Tab**: Back in the configuration pane, select the "Assertions" tab.
+2. **Add First Assertion**:
+   - Click on "Add Assertion". A new assertion row will appear.
+   - **Actual Value**: In the "Actual value" input field, select `response.status`.
+   - **Expected Value**: In the "Expected value" input field, type in `200`.
+3. **Run with Assertion**:
+
+   - Click the "Run" button again.
+   - The API node state should now display "1 Assertions Passed".
+   - Open the details view to see the assertion result, which will be shown at the top.
+
+4. **Add Second Assertion**:
+   - Click on "Add Assertion" again. A new assertion row will appear.
+   - **Actual Value**: In the "Actual value" input field, select `response.data`.
+   - **Comparison Operation**: Click on the "equal" button, which will open a popover showing available comparison operations. Select `isArray`.
+5. **Run with Second Assertion**:
+   - Click the "Run" button again.
+   - The API node state should now display "2 Assertions Passed".
+   - Open the details view to see the detailed results, including the new assertion.
+
+Before you contine, make sure you have saved your test case with the save button at the top right corner of the page.
+
+#### Conclusion
+
+You have successfully created and configured the "List Posts" test case. This test case makes an API call to list posts and asserts that the response status is 200 and that the response data is an array. Next, you can proceed to create more test cases, add them to a test runner, and deploy them for automated execution.
+
+### Step 2: Create the 'Get a Post by ID' Test Case
+
+You can repeat what you just did in Step 1, with slight changes to the URL.
+
+#### Configure the Test Case
+
+1. **Create the Test Case**: Within the "Post Tests" folder, click on "New Test Case" and name it "Get a Post by ID".
+
+2. **Test Case Editor**: In the test case editor page, you will see a tree-shaped editor with a root node labeled "Start".
+
+3. **Add API Node**:
+
+   - Click on "Add Next Step" under the "Start" node.
+   - Select "API Node" from the options. This will add a new node under the "Start" node, which is of type "API" and colored orange.
+
+4. **Title the Node**: Give the new node a title, such as "Get post by ID and ensure it has necessary fields".
+
+5. **Configure the API Call**:
+   - Click on the node type (API). This will open the configuration pane at the bottom of the page.
+   - **URL**: Input the URL `https://jsonplaceholder.typicode.com/posts/{postId}`.
+
+#### Path Variables
+
+Path variables are placeholders in the URL that can be replaced with actual values when making a request. In this case, `{postId}` is a path variable that will be replaced with a specific post ID value.
+
+#### Configure Path Parameter
+
+1. **Add Path Parameter**:
+   - In the configuration pane, find the section for path parameters.
+   - Click on "Add Path Parameter".
+   - Add `postId` and set its value to `1`.
+
+#### Run the API Call
+
+1. **Run the API Call**:
+   - Click the "Run" button located at the top left corner of the page. This will execute the API call immediately.
+   - The execution state will be displayed along with the tree nodes.
+   - Click on "Open details view" to view the API response data.
+
+#### Add Assertions
+
+1. **Assertions Tab**: Back in the configuration pane, select the "Assertions" tab.
+2. **Add First Assertion**:
+   - Click on "Add Assertion". A new assertion row will appear.
+   - **Actual Value**: In the "Actual value" input field, select `response.status`.
+   - **Expected Value**: In the "Expected value" input field, type in `200`.
+3. **Run with First Assertion**:
+
+   - Click the "Run" button again.
+   - The API node state should now display "1 Assertions Passed".
+   - Open the details view to see the assertion result, which will be shown at the top.
+
+4. **Add Second Assertion**:
+
+   - Click on "Add Assertion" again. A new assertion row will appear.
+   - **Actual Value**: In the "Actual value" input field, select `response.data.userId`.
+   - **Comparison Operation**: Click on the "equal" button, which will open a popover showing available comparison operations. Select `exists`.
+
+5. **Repeat Assertions for Other Fields**:
+
+   - Do the same as step 4 for `response.data.id`, `response.data.title`, and `response.data.body`.
+
+6. **Run with All Assertions**:
+   - Click the "Run" button again.
+   - The API node state should now display "5 Assertions Passed".
+   - Open the details view to see the detailed results, including all the new assertions.
+
+Before you contine, make sure you have saved your test case with the save button at the top right corner of the page.
+
+#### Conclusion
+
+You have successfully created and configured the "Get a Post by ID" test case with a path variable. This test case makes an API call to retrieve a specific post by ID, asserts that the response status is 200, and ensures that the response data contains the necessary fields (`userId`, `id`, `title`, and `body`). Next, you can proceed to create more test cases, add them to a test runner, and deploy them for automated execution.
+
+### Step 3: Create a Test Runner for Post Tests
+
+#### Configure the Test Runner
+
+1. **Switch to Test Runners Page**: Navigate to the "Test Runners" page.
+2. **New Runner**: Click on "New Runner", type in "Post Tests Runner" as the name, and save it.
+3. **Select the Runner**: Select the runner on the left sidebar. You will see an interface very similar to the test case designer.
+
+#### Add Selector Node
+
+1. **Add Selector Node**:
+   - Click on "Add Next Step" under the "Start" node.
+   - Select "Selector Node" from the options. This will add a new node under the "Start" node.
+
+2. **Configure the Selector Node**:
+   - Click on the node type (Selector). This will open the configuration pane at the bottom of the page.
+   - **Selector Mode**: Choose "Folder" as the selector mode.
+   - **Select Folder**: Check the "Post Tests" folder. By doing this, all test cases under the "Post Tests" folder will be loaded into this runner.
+   - You can add multiple selector nodes if needed, for example, one for each folder you want to include in the runner.
+
+#### Run the Test Runner
+
+1. **Expand the Selector Node**:
+   - Click the chevron icon of the tree to expand the selector node.
+   - Two reference nodes will show up, each representing a test case loaded from the "Post Tests" folder.
+
+2. **Execute the Test Runner**:
+   - Click the "Run" button. The two test cases will execute one after another.
+   - Once all test cases are executed, a test report will appear at the top of the page, summarizing the results.
+
+Before you contine, make sure you have saved your test runner with the save button at the top right corner of the page.
+
+#### Conclusion
+
+You have successfully created a test runner that includes all test cases under the "Post Tests" folder. This test runner will execute the "List Posts" and "Get a Post by ID" test cases sequentially, providing a comprehensive report of the results. Next, you can proceed to deploy this test runner for automated execution and scheduling.
+
+### Step 4: Create a Test Deployment for Automation
+
+If you'd like to run your test runner automatically, either by schedules or triggered with a webhook, you need to create a test deployment first. The deployment essentially binds your test runner to a specific environment. In this quick start, we will assume you need to run the test runner every hour against a production environment.
+
+#### Create a Test Deployment
+
+1. **Open the Deployment Dialog**:
+   - Click on "Create Test Deployment" from the dropdown menu in the top right corner. A dialog will pop up.
+
+2. **Configure the Deployment**:
+   - **Name**: Give it a name like "Production: Post Tests".
+   - You can skip the server, authorization, and variable group settings for now.
+   - Click "Save".
+
+3. **Access the Deployment**:
+   - Open the deployment on the sidebar under your test runner name.
+
+#### Run the Deployment
+
+1. **Run Immediately**:
+   - Click "Run" on the top right corner. An immediate schedule will be created, and this time the runner will be executed on ReAPI's server instead of your browser.
+   - The execution should complete in less than 20 seconds, and the result will be added to the bottom of the page.
+   - Click "View Details" to access all execution details.
+
+#### Schedule the Deployment
+
+1. **Add a Schedule**:
+   - Click "Add Schedule".
+   - In the dialog, choose "Recurring schedule" and select "Rate-based schedule".
+   - For "Rate", choose `1 HOUR`.
+   - Click "Save".
+
+A recurring scheduler has been created, and your test runner will be executed every hour from now on.
+
+#### Conclusion
+
+You have successfully created and configured a test deployment for your test runner. This deployment runs the test runner on ReAPI's server and is scheduled to execute every hour, providing continuous validation of your APIs against the production environment. With this setup, you can ensure your API endpoints are consistently monitored and validated without manual intervention.
+
+</Steps>
+
+## Conclusion
+
+In this quick start guide, we demonstrated how to set up and run your first API tests using ReAPI without setting up your own test server. You have successfully:
+
+1. Created test cases to list posts and get a specific post.
+2. Asserted that the posts are loaded correctly.
+3. Created a test runner to include these test cases.
+4. Deployed the test runner to execute every hour.
+
+This was a very fast and simple example to get you started quickly. ReAPI's testing platform is much more powerful, offering advanced features for comprehensive API testing. To explore these features and enhance your testing capabilities, please read our next guides.

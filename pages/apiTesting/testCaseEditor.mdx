@@ -1,0 +1,117 @@
+# Create and Edit Test Cases with ReAPI
+
+## Overview
+
+The test case editor is the core of ReAPI's API testing platform. Designed to be both simple to use and powerful when needed, it allows users to create comprehensive and reliable API tests. The editor supports basic API calls and assertions, as well as complex logic flows, reusable test steps, and first-class context variable support.
+
+In this guide, we will explore each of these features in detail to help you create and edit test cases efficiently and effectively.
+
+### Core Features
+
+1. **Basic API Calls and Assertions**: The editor allows you to easily configure API calls and set up assertions to validate the responses.
+2. **Complicated Logic Flow Editor**: For more advanced testing scenarios, the editor supports complex logic flows, including conditional statements, loops, and more.
+3. **Reusable Test Steps**: Reuse common test steps across different test cases to maintain consistency and reduce redundancy.
+4. **First-Class Context Variable Support**: Leverage context variables to manage data and state across your tests seamlessly.
+
+Next, we'll delve into each of these features in detail.
+
+## Organize Test Cases
+
+ReAPI provides robust features for organizing your test cases, making it easy to manage and navigate through them.
+
+1. **Organize by Tags or Folders**: ReAPI supports organizing test cases by tags or folders. This allows you to categorize and group your test cases in a way that makes sense for your workflow.
+2. **Unlimited Nested Folders**: You can create unlimited nested folders. Group related cases together whenever possible. ReAPI supports smart sorting by prefix digit. For example, with folders named "2-test" and "11-test," you don't have to name it "02-test" to ensure it is placed before "11-test."
+3. **Create and Add Tags**: You can create tags and add multiple tags to your test cases, providing another layer of organization and searchability.
+4. **Use in Test Runner**: The folders and tags will be used for selecting test cases in a runner later, allowing for efficient test case management and execution.
+
+## Overview of Step Types
+
+ReAPI offers a variety of step types to build your test cases, each serving a specific purpose to create a robust testing workflow. Here’s a detailed overview:
+
+### Basic Step Types
+
+| **Step Type**     | **Purpose**                       | **Capabilities**                                                                                           | **Example**                                                       |
+| ----------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **API Node**      | Call HTTP APIs                    | Perform assertions and carry out context operations, such as extracting a response property to a variable. | Make a GET request to an API endpoint and assert the status code. |
+| **Sequence Node** | Group steps for organization      | Organize your steps in a human-readable structure.                                                         | Group multiple API calls into a single sequence for readability.  |
+| **If Node**       | Conditional branching             | Fork the next steps based on a predicate expression.                                                       | Check if a response status is 200, then proceed accordingly.      |
+| **Context Node**  | Prepare data for subsequent steps | Generate data such as current timestamp or fake data for later usage.                                      | Generate a current timestamp to use in an API call.               |
+| **Wait Node**     | Pause execution                   | Wait for a period of time, useful for waiting for the completion of async tasks.                           | Wait for 5 seconds before proceeding to the next step.            |
+
+### Advanced Step Types
+
+| **Step Type**      | **Purpose**                      | **Capabilities**                                                                                             | **Example**                                                 |
+| ------------------ | -------------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| **Loop Node**      | Repeat steps multiple times      | Configure iterations with optional delays between each. Efficient for polling tasks, e.g., every 30 seconds. | Poll an API every 30 seconds for a total of 5 minutes.      |
+| **Iteration Node** | Iterate over a list of data      | Execute child steps for each item in the list, useful for testing multiple data items with the same steps.   | Iterate over a list of user IDs and fetch details for each. |
+| **Reference Node** | Reuse or clone another test case | Refer to or clone another test case flagged as 'Reusable' for modularizing common test steps.                | Reuse a login test case in multiple other test scenarios.   |
+| **Selector Node**  | Only available in test runners   | Select test cases by tags, folders, and priorities to add to the test runner’s scope.                        | Select all test cases in the "Critical Tests" folder.       |
+
+These step types provide a comprehensive toolkit for designing robust and flexible test cases in ReAPI.
+
+## Overview of Reusable Test Cases
+
+ReAPI provides a feature that allows test cases to be reused, enhancing the efficiency and consistency of your testing efforts. Here's how it works:
+
+### Enabling Reusability
+
+For each test case, there is a flag that can be turned on to enable reusability. Once this flag is enabled, the test case can be referenced or cloned from other test cases using the reference node.
+
+### Reference Node
+
+The reference node is a powerful tool that allows you to incorporate reusable test cases into your new or existing test cases.
+
+#### Referencing a Test Case
+
+- **Purpose**: When you refer to a test case, such as a 'Login' test case, any changes made to the original test case will be reflected in all references. This ensures consistency and reduces the effort required to maintain multiple test cases.
+- **Use Case**: Ideal for steps that are common across multiple test cases and need to be kept in sync, such as authentication steps.
+
+#### Cloning a Test Case
+
+- **Purpose**: If your goal is to create a test case template, you should clone the test case. Cloning creates an independent copy of the test case, which can then be modified without affecting the original test case.
+- **Use Case**: Perfect for creating templates for frequently used patterns, allowing you to customize the cloned test cases as needed without impacting the original template.
+
+### Practical Examples
+
+- **Referencing**: You have a 'Login' test case that is used in multiple other test cases. By referencing the 'Login' test case, any updates to the login process will automatically apply to all test cases that reference it.
+- **Cloning**: You have a test case template for 'User Registration'. By cloning this test case, you can create variations for different types of user registrations while keeping the original template unchanged.
+
+By using the reusability flag and the reference node effectively, you can streamline your test creation process, ensure consistency across your test cases, and save time on maintenance.
+
+## Overview of Context Variables
+
+### Importance of Context Variables in API Testing
+
+Context variables are crucial in API testing for several reasons:
+
+- **Dynamic Values**: They allow you to handle dynamic values, such as tokens, timestamps, or any data that changes between API calls.
+- **Calling Chain**: They enable data to be passed between different API calls, creating a calling chain where the output of one API call can be used as the input for another.
+
+### Context Operations in ReAPI
+
+ReAPI provides powerful context operations to manage these variables effectively:
+
+- **Set Variables**: You can set context variables from both API nodes and context nodes. This allows you to capture and store data from API responses or generate data dynamically.
+- **Delete Variables**: You can delete context variables when they are no longer needed, ensuring that your tests remain clean and free of unnecessary data.
+
+### Isolation of Context Variables
+
+All context variables in ReAPI are tracked based on the tree node and its descendant nodes. This means that:
+
+- **Isolation**: Context variables are isolated within their respective branches of the test case. Changes in one branch do not affect variables in another branch.
+- **Scoped Variables**: Variables set in a parent node are accessible to its child nodes, but variables set in child nodes do not affect sibling or parent nodes.
+
+### UI Support for Context Variables
+
+ReAPI's UI provides extensive support for managing and tracking context variables:
+
+- **Variable Tracking**: The UI tracks the names of context variables for each step, allowing you to confidently refer to them without worrying about naming conflicts.
+- **Context Visualization**: When you run your test case, ReAPI records the context values at each step and displays them in the UI. This makes it easy to identify the state of variables at any point in the test execution.
+
+### Benefits of Context Variable Management
+
+- **Debugging**: By showing context values at each step, ReAPI helps you quickly identify and diagnose issues in your test cases.
+- **Clarity**: Clear tracking and isolation of context variables ensure that your tests are easy to understand and maintain.
+- **Flexibility**: The ability to dynamically manage context variables allows for more flexible and powerful test cases.
+
+In summary, context variables in ReAPI provide a robust mechanism for managing dynamic data and creating complex API testing scenarios. With comprehensive UI support and powerful context operations, you can confidently build, debug, and maintain your API tests.

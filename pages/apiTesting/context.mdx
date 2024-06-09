@@ -1,0 +1,114 @@
+# Context and Variables in ReAPI Test Case Designer
+
+## Overview
+
+Context and variables are fundamental components in the ReAPI test case designer, playing a crucial role in creating dynamic, flexible, and maintainable API tests. They enable you to:
+
+1. **Handle Dynamic Data**: Manage and utilize dynamic values that change with each test run, such as tokens, timestamps, and response data.
+2. **Create Data-Driven Tests**: Facilitate the creation of tests that adapt based on variable input, allowing for comprehensive coverage of different scenarios.
+3. **Maintain State Across Steps**: Pass data between different steps and test cases, ensuring continuity and enabling complex testing workflows.
+4. **Enhance Reusability**: Use context variables to create reusable test steps and templates, reducing redundancy and improving test maintenance.
+
+By effectively leveraging context and variables, you can design more robust, efficient, and adaptable test cases that accurately reflect real-world API interactions.
+
+## Access Context Variables
+
+You can access context variables in several places within the ReAPI test case designer. Here are the primary locations and formats for accessing these variables:
+
+### Types of Expressions for Accessing Variables
+
+1. **Direct Value Access**: Simple read value by value path.
+2. **Jsonata Expression**: More powerful and flexible, supports direct value access and complex transformations. For more information, please read our guide.
+
+### Accessing Context Variables
+
+| **Location**                           | **Format**                                                 | **Type** | **Example**                                                       |
+| -------------------------------------- | ---------------------------------------------------------- | -------- | ----------------------------------------------------------------- |
+| **API Node: URL**                      | `{varName}`                                                | Direct   | `https://api.example.com/users/{userId}`                          |
+| **API Node: Parameter Values**         | `{{varName}}`                                              | Direct   | `Authorization: Bearer {{accessToken}}`                           |
+| **API Node: Request Body**             | <span style={{whiteSpace:'nowrap'}}>`"{{varName}}"`</span> | Direct   | `{ "email": "{{userEmail}}" }`                                    |
+| **API Node: Assertion Items**          | `expression`                                               | Jsonata  | Assertion: `response.data.userId` should be `userId`              |
+| **API Node: Context Operations**       | `expression`                                               | Jsonata  | Context operation: extract `response.data.token` as `accessToken` |
+| **Context Node**                       | `expression`                                               | Jsonata  | Set current timestamp: `currentTimestamp`                         |
+| **If Node: Condition**                 | `expression`                                               | Jsonata  | Condition: `response.status = 200`                                |
+| **If Node: Break Condition**           | `expression`                                               | Jsonata  | Break condition: `response.data.success = true`                   |
+| **Loop Node: Value Source Expression** | `expression`                                               | Jsonata  | Value source expression: `userIds`                                |
+
+#### Note on Variable Access Formats
+
+- **URL**: The reason to access variables in URLs with single brackets `{varName}` is to maintain compatibility with OpenAPI specification.
+- **Parameters and Request Body**: For parameters and request body, you need to use double brackets `{{varName}}`.
+
+By understanding and utilizing these formats, you can effectively manage and manipulate context variables across various nodes in your test cases, enabling dynamic and adaptable testing scenarios.
+
+#### Context Scope in Test Case Tree
+
+In ReAPI, context variables are scoped within the test case tree, meaning they are accessible from the node they are set in to all its descendants, and to subsequent sibling nodes. This hierarchical structure ensures that variables set at a specific node are available to all nodes beneath it, but not to nodes above it or previous siblings.
+
+##### Key Points
+
+- **Context Accessibility**: Variables set at a parent node can be accessed by all its child nodes and subsequent siblings. However, variables set in a child node are not accessible to previous sibling or parent nodes.
+- **Hierarchy Importance**: Be mindful of your node hierarchy when designing your test case flow to ensure that all necessary context variables are accessible where needed.
+- **Isolation**: Each branch in the test case tree can have its own set of context variables, which helps in maintaining isolated and independent test scenarios within the same test case.
+
+##### Example
+
+Consider the following test case tree structure:
+
+```
+Start Node
+├── Context Node (sets variable `baseUrl`)
+│   ├── API Node (uses `baseUrl`)
+│   └── If Node (condition: `baseUrl` exists)
+│       ├── Context Node (sets variable `userId`)
+│       └── API Node (uses `userId`)
+```
+
+In this example:
+
+- The `baseUrl` set in the first context node is accessible to the API node and the If node.
+- The `userId` set in the child context node of the If node is accessible only to its sibling API node within the If branch.
+
+##### Design Tips
+
+- **Plan Your Variables**: When setting context variables, plan their scope and ensure they are placed at appropriate nodes to be accessible where needed.
+- **Use Context Nodes Wisely**: Use context nodes to prepare data and set variables at higher levels in the tree to make them available for multiple steps.
+- **Maintain Clarity**: Keep the test case tree structure clear and organized to avoid confusion and ensure the proper flow of context variables.
+
+By understanding and carefully managing the context scope in your test case tree, you can design more efficient and reliable API tests.
+
+## Update Context Variables
+
+### 1. Methods to Update Context Variables
+
+You can update context variables either from a standalone context node or from API node's context operations when a response is returned.
+
+- **Context Node**: Useful for preparing data before executing further steps.
+  - **Example Uses**:
+    - Set a global `currentTimestamp`.
+    - Generate a random `userId`.
+    - Create a default `userRole`.
+- **API Node Context Operations**: Useful for extracting data from response JSON and setting it for usage by subsequent steps.
+  - **Example Uses**:
+    - Extract `response.data.token` and set it as `accessToken`.
+    - Extract `response.data.userId` and set it as `userId`.
+
+### 2. Use Predefined Functions
+
+ReAPI supports assigning dynamic values using predefined functions through the UI. Currently, we support faker.js generators and built-in functions.
+
+On the action buttons, the left one with the function symbol, click to explore and select available functions.
+
+### 3. Use Jsonata Expression
+
+Besides direct reading of values from response JSON, you can perform transformations with Jsonata expressions. Jsonata provides powerful capabilities to manipulate and transform JSON data.
+
+- **Example Transformations**:
+  - **Concatenate Strings**: Combine first name and last name from the response.
+    - Expression: `response.data.firstName & ' ' & response.data.lastName`
+  - **Filter Array**: Extract specific items from an array based on a condition.
+    - Expression: `response.data.items[price > 20]`
+  - **Map and Transform**: Apply transformations to each item in an array.
+    - Expression: `response.data.items.{ "name": name.toUpperCase(), "price": price * 1.2 }`
+
+By leveraging these methods and tools, you can efficiently update and manage context variables, making your API tests more dynamic and adaptable to various testing scenarios.

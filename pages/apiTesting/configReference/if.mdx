@@ -1,0 +1,51 @@
+# If Node
+
+## Overview
+
+The If node in ReAPI allows you to control the flow of your test case based on a condition. By using a Jsonata expression, the If node evaluates to a boolean result to decide which step to execute next: the `then` step or the `else` step.
+
+### Important Notice
+
+1. **Context-Only Access**: The If node does not have access to response data directly. All data must be prepared into context variables before being evaluated by the If node.
+2. **Use Sequence Nodes for Multiple Steps**: If your next step involves multiple actions, use a `Sequence` node instead of a single step to ensure proper execution flow. Without this, your test may get stuck.
+
+## Why If Node is Useful
+
+The If node is useful for introducing conditional logic into your test cases. This allows you to handle different scenarios dynamically based on the API response or context variables. It helps in:
+
+1. **Branching Logic**: Execute different steps based on specific conditions.
+2. **Error Handling**: Implement error handling by checking response statuses and acting accordingly.
+3. **Flexible Testing**: Adapt test flows dynamically, making your tests more robust and versatile.
+
+### Examples
+
+1. **Check Context Variable**:
+
+   - **Use Case**: If the context variable `statusCode` is 200, proceed to validate the response data; otherwise, log an error.
+   - **Configuration**:
+     - **Condition**: `context.statusCode = 200`
+     - **Then Step**: Sequence node for response validation
+     - **Else Step**: Log error step
+
+2. **User Role-Based Flow**:
+
+   - **Use Case**: Depending on the user's role, execute different sets of tests.
+   - **Configuration**:
+     - **Condition**: `context.userRole = 'admin'`
+     - **Then Step**: Sequence node for admin-specific tests
+     - **Else Step**: Sequence node for regular user tests
+
+3. **Data Presence Check**:
+   - **Use Case**: If a specific data field is present in the context, perform further validation; otherwise, skip to the next test.
+   - **Configuration**:
+     - **Condition**: `context.isFieldPresent = true`
+     - **Then Step**: Sequence node for field validation
+     - **Else Step**: Skip to next test step
+
+### Best Practices
+
+- **Use Sequence Nodes**: When the next step involves multiple actions, wrap them in a Sequence node to maintain a clear and executable flow.
+- **Write Clear Conditions**: Ensure your Jsonata expressions are clear and accurately reflect the conditions you want to evaluate.
+- **Plan for Both Outcomes**: Always plan and configure both the `then` and `else` steps to handle all possible outcomes of the condition.
+
+By effectively using the If node, you can introduce sophisticated conditional logic into your test cases, enhancing their flexibility and robustness.

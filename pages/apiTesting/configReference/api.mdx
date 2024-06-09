@@ -1,0 +1,194 @@
+import { Callout } from "nextra/components";
+
+# API Node Reference
+
+## Overview
+
+The API node configuration in ReAPI has four main tabs: Request, Assertions, Schema, and Information. Each tab serves a specific purpose in setting up and managing your API tests.
+
+1. **Request**: This tab is used to configure the request URL, parameters, request body, headers, and other request-related settings.
+2. **Assertions**: This tab is used to configure assertion statements to validate the API response and context operations to manage context variables.
+3. **Schema**: This tab is used to connect to API documentation and automatically validate the response schema against the defined API specifications.
+4. **Information**: This tab is for setting the title and description of the API node to explain what this step does, providing clarity and documentation within the test case.
+
+## Request Config
+
+### Parameters Setup
+
+**URL**: Configure the HTTP method and URL.
+
+- **Relative Path**: Typically, the URL is a relative path combined with the environment server base URL.
+- **Path Variables**: Declare path variables with `{varName}` (e.g., `/users/{userId}`). Set the values of path variables in the path parameters section.
+
+**Parameters**:
+
+1. **Path Parameters**: If any, to access context values, use `{{varName}}`.
+2. **Query Parameters**: If any, to access context values, use `{{varName}}`.
+
+**Headers**: Configure request headers.
+
+- Use the same format as query parameters to access context values: `{{varName}}`.
+
+**Request Body**: Configure the request body.
+
+- **Content Type**: Select the appropriate content type, such as JSON.
+- **Editor**: Input JSON data in the editor. Use `"{{varName}}"` within the JSON to access context values.
+
+<Callout>
+  **Important Notice**: In the API node request parameters setup, you don't need
+  to add `context.varName` to access context values. However, in other parts
+  such as assertions and context operations, you will need to use the prefix
+  `context.`. This is because, in those locations, fixtures are also accessible
+  along with context variables.
+</Callout>
+
+### Other Setup
+
+You can override global settings at the request level:
+
+- **Timeout**: Override the default timeout (120 seconds).
+  - **Example**: If a specific request is expected to take longer due to processing time, you might set the timeout to 300 seconds for that particular request.
+- **Authorization**: Override the global authorization settings.
+  - **Example**: If a particular API call requires a different authorization token than the one set globally, you can specify the token at the request level.
+- **Server**: Override the global server settings.
+  - **Example**: If you need to test a specific endpoint on a different server without changing the global server configuration, you can set the server URL at the request level.
+
+### Why Override at Request Level is Important
+
+Overriding at the request level is crucial for scenarios where individual requests have unique requirements that differ from the global settings. This flexibility allows for more precise and accurate testing. For instance:
+
+- Testing different authorization methods for different endpoints.
+- Adjusting timeouts for resource-intensive operations.
+- Pointing to a different server for specific tests without affecting the overall environment configuration.
+
+By configuring these parameters and settings, you can tailor each API request to meet specific testing needs, ensuring accurate and thorough validation of your API endpoints.
+
+## Assertions and Context Operations
+
+### Context Operations
+
+Context operations allow you to extract and transform data from the response using Jsonata expressions. These operations are executed before assertions, giving you a chance to simplify and prepare your data for easier validation.
+
+**Example**:
+
+- Use `$count(response.data.posts)` to set a context variable `sizeOfPosts`.
+- In your assertions, you can then use `sizeOfPosts isAbove 0`.
+
+### Types of Context Operations
+
+1. **Set**:
+
+   - **Purpose**: To set or replace a value in the context.
+   - **Example**: Extract `response.data.token` and set it as `accessToken`.
+
+2. **Delete**:
+
+   - **Purpose**: To remove a value from the context.
+   - **Example**: Delete a context variable `temporaryData` after it's no longer needed.
+
+3. **Push**:
+   - **Purpose**: To add a new value to a context array.
+   - **Use Case**: Useful with loops to generate a list of data.
+   - **Example**: Use a loop and faker value to generate a list of random first names.
+     - Loop through a number of iterations, each time using `faker.name.firstName` to generate a random first name and push it into a context array `firstNames`.
+
+### Using Functions in Context Operations
+
+Context operations also support using functions to generate dynamic data. The function symbol in the UI toggles the value type between Jsonata expression and function generator.
+
+**Supported Generators**:
+
+1. **Faker.js**: Generate realistic test data.
+   - **Examples**:
+     - `faker.name.findName` to generate a random name.
+     - `faker.internet.email` to generate a random email.
+2. **System Values**: Predefined functions to generate system-related values.
+   - **Examples**:
+     - `currentTimestamp` to generate the current timestamp.
+
+By using context operations and dynamic data functions, you can create more flexible and powerful test cases, ensuring your API is thoroughly validated under various conditions.
+
+## Assertions
+
+ReAPI's assertion operators are a subset of [chai.js](https://www.chaijs.com/api/bdd/). This allows you to use familiar assertion styles to validate your API responses.
+
+### Assertion Operators
+
+ReAPI supports a variety of assertion operators, such as:
+
+- `equal`: Checks if two values are equal.
+- `notEqual`: Checks if two values are not equal.
+- `isAbove`: Checks if a value is greater than another.
+- `isBelow`: Checks if a value is less than another.
+- `exists`: Checks if a value exists.
+- `isArray`: Checks if a value is an array.
+
+### Using Jsonata Expressions
+
+Both the actual value and expected value in assertions use Jsonata expressions. This allows you to access and manipulate data directly from the response and context.
+
+- **Actual Value**: Typically derived from the API response using the `response.` prefix.
+  - Example: `response.data.userId`
+- **Expected Value**: Can be a static value or derived from the context using the `context.` prefix.
+  - Example: `context.expectedUserId`
+
+For more information and to experiment with Jsonata expressions, visit our [Jsonata Playground](https://www.reapi.com/playground/jsonata).
+
+### Debugger UI
+
+If the API node has data state (must be run already), you will see a `Debugger` button. This opens a debugger UI to show available data, making it easier to write your value inputs for assertions.
+
+**Example Workflow**:
+
+1. **Run API Node**: Execute the API node to generate the response data.
+2. **Open Debugger**: Click the `Debugger` button to view the available response data.
+3. **Write Assertions**: Use the debugger to help write actual and expected values for assertions.
+
+### Examples of Assertions Using Jsonata Expressions
+
+#### Simple Assertions
+
+1. **Check Status Code**:
+
+   - **Actual Value**: `response.status`
+   - **Operator**: `equal`
+   - **Expected Value**: `200`
+   - **Assertion**: `response.status equal 200`
+
+2. **Check Existence of User ID**:
+
+   - **Actual Value**: `response.data.userId`
+   - **Operator**: `exists`
+   - **Expected Value**: `true`
+   - **Assertion**: `response.data.userId exists true`
+
+3. **Check if Response Data is an Array**:
+   - **Actual Value**: `response.data`
+   - **Operator**: `isArray`
+   - **Expected Value**: `true`
+   - **Assertion**: `response.data isArray true`
+
+#### Complicated Assertions
+
+1. **Check Number of Posts**:
+
+   - **Context Operation**: `$count(response.data.posts)` set to `numberOfPosts`
+   - **Actual Value**: `context.numberOfPosts`
+   - **Operator**: `isAbove`
+   - **Expected Value**: `0`
+   - **Assertion**: `context.numberOfPosts isAbove 0`
+
+2. **Check Specific User's Email**:
+
+   - **Actual Value**: `response.data.users[userId = context.expectedUserId].email`
+   - **Operator**: `equal`
+   - **Expected Value**: `context.expectedUserEmail`
+   - **Assertion**: `response.data.users[userId = context.expectedUserId].email equal context.expectedUserEmail`
+
+3. **Verify Nested Object Property**:
+   - **Actual Value**: `response.data.profile.address.city`
+   - **Operator**: `equal`
+   - **Expected Value**: `"New York"`
+   - **Assertion**: `response.data.profile.address.city equal "New York"`
+
+By leveraging these features and examples, you can effectively validate your API responses and ensure they meet the expected criteria.

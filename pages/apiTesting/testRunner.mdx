@@ -1,0 +1,56 @@
+# Use Test Runner
+
+## Overview
+
+A test case is a small unit designed to test one specific function or scenario. While individual test cases are essential for validating specific aspects of an API, real-world testing often requires running multiple test cases together. This is where the test runner comes into play. The test runner allows you to:
+
+1. **Run Multiple Test Cases**: Execute a set of related test cases in a specific order to validate a broader scope of functionality.
+2. **Group Test Cases by Scope**: Organize and group test cases related to a particular feature, user journey, or system behavior.
+3. **Automate Testing**: Schedule and automate the execution of test cases, ensuring continuous validation without manual intervention.
+4. **Generate Comprehensive Reports**: Collect results from multiple test cases to provide a comprehensive overview of the API's performance and reliability.
+5. **Manage Dependencies**: Handle dependencies between test cases, ensuring that the order of execution supports complex testing scenarios.
+
+By using a test runner, you can streamline your testing process, improve coverage, and ensure that your API is robust and reliable in real-world conditions.
+
+## Select Test Cases
+
+### 1. Selector Node
+
+A specific type of node called the **Selector Node** is available exclusively for the test runner. This node is designed to help you select and organize test cases for execution.
+
+### 2. Configure the Selector Node
+
+Open the configuration pane of the Selector Node, where you can:
+
+- **Select by Folders or Tags**: Choose test cases based on their folder location or assigned tags.
+- **Set Priorities**: Assign priorities to test cases to control the order of execution when necessary.
+
+### 3. Use Multiple Selector Nodes
+
+You can add multiple Selector Nodes to your test runner, each configured with specific tags or folders. This approach is encouraged to:
+
+- **Generate Structured Reports**: By grouping test cases logically, you can create clear and structured test reports.
+- **Enhance Flexibility**: Combine different folders and tags to precisely select the desired test cases for your test runner.
+
+### 4. Flexibility with Folders and Tags
+
+Combining folders and tags gives you maximum flexibility in selecting test cases. You can tailor the selection to meet various testing needs and scenarios, ensuring comprehensive coverage and efficient organization.
+
+### 5. Capabilities of the Test Runner
+
+The test runner has all the capabilities of the test case editor, meaning you can:
+
+- **Add Standalone Nodes**: Prepare data or run additional API nodes within the test runner.
+- **Run Complex Scenarios**: Utilize the full range of nodes and logic available in the test case editor to create sophisticated testing workflows.
+- **Prepare Data**: Set up context nodes to generate or manipulate data before executing the test cases.
+- **Validate End-to-End**: Create end-to-end testing scenarios by chaining together multiple test cases with data preparation and verification steps.
+
+By leveraging these features, the test runner becomes a powerful tool for orchestrating complex test scenarios and ensuring thorough validation of your APIs.
+
+## What's Next
+
+If you prefer to run your tests manually, the test runner is a powerful and efficient tool that is good enough for most needs. However, in many scenarios, you need to automate your tests to ensure continuous validation and save time on manual execution. This is where deploying a test runner for automation becomes essential.
+
+By deploying a test runner, you can schedule tests to run at specified intervals, trigger tests based on events, and ensure that your APIs are continuously monitored and validated without manual intervention.
+
+Please read our next guide on automation to learn how to deploy your test runners and set up automated testing workflows.

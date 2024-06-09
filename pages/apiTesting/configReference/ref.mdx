@@ -1,0 +1,54 @@
+# Reference Node
+
+## Overview
+
+The Reference node in ReAPI is a powerful tool that allows you to reuse test steps and test cases, making your tests more modular, maintainable, and efficient. By referring to reusable steps or cloning test cases, you can create consistent and streamlined test flows.
+
+## Why Reference Node is Useful
+
+1. **Reusable Steps**: Helps in maintaining a single source of truth for commonly used steps, reducing redundancy and improving consistency across tests.
+2. **Modular Test Design**: Facilitates modular test design, making it easier to update and manage test cases.
+3. **Efficiency**: Speeds up the test creation process by allowing you to reuse existing logic instead of writing new steps from scratch.
+
+### How to Use Reference Node
+
+There are two main ways to use the Reference node in ReAPI:
+
+1. **Refer to a Reusable Test Case**:
+
+   - When you refer to a reusable test case, any changes made to the original test case will be reflected in all references. This is useful for maintaining a single source of truth.
+   - **Example Use Case**: A login test case that needs to be executed before various other test cases. By referring to this reusable login test case, any update to the login steps will automatically propagate to all referencing test cases.
+
+2. **Clone (Acting Like a Template)**:
+   - Cloning a test case creates a copy that can be modified independently of the original. This is useful when you want to use an existing test case as a template but need to customize it for specific scenarios.
+   - **Example Use Case**: Creating multiple test cases for different user roles based on a common login template. Each cloned test case can then be customized for the specific user role without affecting the original template.
+
+### Examples
+
+1. **Refer to a Reusable Test Case**:
+
+   - **Use Case**: A common login sequence that is used across multiple test scenarios.
+   - **Configuration**:
+     - Create a reusable test case for login.
+     - Use the Reference node to refer to this login test case in other test cases.
+
+2. **Clone a Test Case**:
+   - **Use Case**: Creating test cases for different user roles based on a standard login sequence.
+   - **Configuration**:
+     - Clone the login test case as a template.
+     - Modify the cloned test cases for specific user roles, such as admin, regular user, and guest.
+
+### Important Notice
+
+When a Reference node is added to the current flow, it shares the same context. Be careful with reusable steps to avoid:
+
+1. **Polluting Context**: Ensure that the reusable steps do not introduce unnecessary or conflicting context variables.
+2. **Context Key Conflicts**: Avoid using the same context keys in different reusable steps to prevent conflicts and ensure data integrity.
+
+### Best Practices
+
+- **Keep Reusable Test Cases Up-to-Date**: Regularly update your reusable test cases to ensure all references are up-to-date with the latest logic.
+- **Use Descriptive Names**: Give your reusable test cases and cloned test cases descriptive names to easily identify their purpose and variations.
+- **Plan for Reusability**: When designing your test cases, plan for which steps can be reused across multiple scenarios to maximize the efficiency and maintainability of your tests.
+
+By leveraging the Reference node effectively, you can create a more organized and efficient testing framework that reduces redundancy and improves the maintainability of your test cases.

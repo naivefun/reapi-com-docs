@@ -1,0 +1,64 @@
+# Selector Node
+
+## Overview
+
+The Selector node in ReAPI is used exclusively within the test runner. It is designed to help you organize and execute multiple test cases efficiently. By selecting test cases based on tags, folders, and priorities, the Selector node provides a flexible and powerful way to manage and run your tests.
+
+### Why Selector Node is Important
+
+1. **Efficient Test Management**: Allows you to group and execute related test cases together, ensuring comprehensive coverage of specific areas or functionalities.
+2. **Flexible Selection**: Provides multiple options to select test cases, making it easier to tailor the test runs to specific requirements.
+3. **Improved Organization**: Helps maintain a well-organized test suite by grouping test cases logically based on tags and folders.
+
+### Examples
+
+1. **Running Tests for a Specific Feature**:
+
+   - **Use Case**: Run all test cases related to the "user authentication" feature.
+   - **Configuration**: Use tags to select all test cases tagged with "user-auth".
+
+2. **Executing Regression Tests**:
+
+   - **Use Case**: Run all regression tests stored in specific folders.
+   - **Configuration**: Use folder selection to include all test cases in the "regression-tests" folder and its subfolders.
+
+3. **Prioritizing Critical Tests**:
+   - **Use Case**: Ensure only high-priority test cases are selected and run.
+   - **Configuration**: Set priorities to select only the critical test cases for execution.
+
+### Selector Node Configuration Options
+
+The Selector node has three configuration options:
+
+1. **By Tag**:
+
+   - **Description**: Select test cases based on tags.
+   - **Usage**: You can select multiple tags, which will pick test cases that match ALL selected tags.
+   - **Example**: Select test cases tagged with both "login" and "security".
+
+2. **By Folders**:
+
+   - **Description**: Select test cases based on folders.
+   - **Usage**: Select one or more folders, and all test cases within those folders and their descendant folders will be included.
+   - **Example**: Select test cases in the "integration-tests" folder and all its subfolders.
+
+3. **Priorities**:
+   - **Description**: Only test cases flagged in the priority list will be selected. This is useful for isolating tests by importance.
+   - **Usage**: Assign priorities to ensure that only certain test cases are selected based on their priority.
+   - **Example**: Create a test runner that focuses only on critical test cases to be run every hour. Another test runner could focus on medium-priority tests to be run daily.
+
+### Example Configuration
+
+**Running User Authentication Tests**:
+
+```json
+{
+  "byTag": ["user-auth", "security"],
+  "byFolders": ["user-tests"],
+  "priorities": ["critical"]
+}
+```
+
+- **Explanation**: This configuration will select test cases tagged with both "user-auth" and "security", include all test cases in the "user-tests" folder, and select only the test cases flagged as "critical".
+
+By using the Selector node effectively, you can streamline your test execution process, ensuring that the right tests are run in the right order, and that your test suite remains organized and efficient.

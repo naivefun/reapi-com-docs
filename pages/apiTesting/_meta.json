@@ -1,0 +1,10 @@
+{
+  "intro": "Introduction",
+  "quickStart": "Quick Start",
+  "env": "Environment Management",
+  "context": "Context and Variables",
+  "testCaseEditor": "Test Case",
+  "testRunner": "Test Runner & Report",
+  "testDeployment": "Deployment & Automation",
+  "configReference": "Configuration Reference"
+}

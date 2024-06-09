@@ -1,0 +1,52 @@
+# Sequence Node
+
+## Overview
+
+The sequence node in ReAPI acts as a group node, executing its child nodes one after another in a specified order. This simple yet powerful feature is essential for organizing and structuring your test cases logically.
+
+## Why Sequence Node is Important
+
+Organizing your test steps and grouping them logically can significantly enhance the readability and maintainability of your test cases. Here’s why the sequence node is so valuable:
+
+1. **Improved Readability**: Grouping related steps together under a sequence node makes the test flow easier to understand at a glance.
+2. **Logical Structure**: It allows you to logically segment your tests into clear, manageable sections.
+3. **Easier Maintenance**: Well-organized test cases are easier to maintain, update, and debug, especially as they grow in complexity.
+
+### Examples
+
+1. **User Authentication Flow**:
+
+   - **Use Case**: Group steps related to user login and authentication.
+   - **Configuration**:
+     - **Title**: "User Authentication"
+     - **Child Nodes**:
+       1. Enter user credentials
+       2. Submit login request
+       3. Validate login response
+
+2. **Data Setup and Cleanup**:
+
+   - **Use Case**: Group steps for setting up test data and cleaning it up after tests.
+   - **Configuration**:
+     - **Title**: "Data Setup and Cleanup"
+     - **Child Nodes**:
+       1. Create test data
+       2. Execute test
+       3. Delete test data
+
+3. **API Workflow**:
+   - **Use Case**: Group steps for an API workflow that involves multiple API calls.
+   - **Configuration**:
+     - **Title**: "API Workflow"
+     - **Child Nodes**:
+       1. Send initial request
+       2. Validate initial response
+       3. Send subsequent request based on the initial response
+
+## Best Practices
+
+- **Use Descriptive Titles**: Give each sequence node a clear and descriptive title that reflects its purpose.
+- **Group Logically**: Organize your test steps into logical groups that make sense for the workflow you are testing.
+- **Maintain Clarity**: Keep the structure clear and straightforward to make it easier for anyone reviewing the test case to understand the flow.
+
+By using sequence nodes effectively, you can create well-organized, maintainable, and readable test cases that enhance the overall quality and efficiency of your API testing.
