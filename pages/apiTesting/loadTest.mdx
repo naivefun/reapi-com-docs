@@ -1,0 +1,58 @@
+import { Callout } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# Load Test
+
+<Callout emoji="👾">
+  Please note that the load test feature is still under experiment. As a result,
+  you might encounter unexpected behaviors or limitations. We appreciate your
+  feedback to help us improve this feature.
+</Callout>
+
+### What Makes ReAPI's Load Test Different
+
+1. **Simplicity**: ReAPI's load test is simple to configure and run. You can easily set up and execute load tests without needing extensive expertise or complex setups.
+2. **Comprehensive Node Support**: ReAPI's load test is just one type of test node. We retain all other types of nodes so you can design your load test based on flows rather than a single API endpoint. This flexibility allows for more realistic and comprehensive testing scenarios.
+
+3. **Real-Time Metrics Visualization**: We visualize the metrics in real-time with charts. This immediate feedback helps you quickly identify performance issues and bottlenecks.
+
+4. **Local and Remote Runner Support**: We support both local and remote runners (coming soon), allowing you to run load tests on your local machine, VPN, LAN, or remote servers. This versatility ensures you can test in any environment that mirrors your production setup.
+
+5. **Stress and Endurance Tests**: ReAPI supports both stress tests and endurance tests (coming soon). Whether you need to test short bursts of high load or sustained traffic over a long period, ReAPI has you covered.
+
+6. **Data-Driven Load Tests**: We support data-driven load tests (coming soon). This feature will allow you to use different data sets for each test iteration, simulating real-world usage patterns and making your load tests even more robust.
+
+### How to Use Load Test
+
+<Steps>
+### Create a Test Runner
+
+Start by creating a test runner with the 'Load Test' option enabled. This allows you to add 'Load Test' nodes to your test flow.
+
+### Configure Load Test Node
+
+- **Add Load Test Node**: Once the 'Load Test' option is enabled, you can add a 'Load Test' node to your test flow.
+- **Stress Test Configuration**: For now, you can configure a stress test by specifying the total number of times to run its children and the concurrency level.
+- **Multiple Load Test Steps**: You can add multiple load test steps, such as an initial warm-up load test followed by the main test.
+
+<Callout>
+**Be careful with the concurrency level**: Depending on the machine that runs your tests, setting a too high concurrency level can cause performance issues or even crashes. It is recommended to start with a small number, such as 50, and gradually increase it. Please note that our runner currently does not support multi-threading.
+</Callout>
+
+### Prepare Other Nodes:
+
+You can prepare your load test by adding other types of nodes, such as an API node to load some configuration data or set up initial states.
+
+### Run the Load Test
+
+- **Press 'Run' Button**: Once your configuration is complete, simply press the 'Run' button.
+- **Set Up Runtime**: If you don't see the 'Run' button, follow the 'Set Up Runtime' instructions that appear where the 'Run' button should be. This involves running a simple command line to start a background runner, necessary because the browser runner has concurrency level limits.
+
+### Realtime Metrics Visualization
+
+- **Execution**: After clicking the 'Run' button, wait for a few seconds.
+- **Metrics Chart**: A real-time chart will appear on the page, showing real-time metrics, allowing you to monitor the performance and behavior of your API under load.
+
+</Steps>
+
+By following these steps, you can effectively set up and run load tests using ReAPI, gaining valuable insights into your API's performance and reliability under different load conditions.
