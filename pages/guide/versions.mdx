@@ -1,23 +1,56 @@
 # Version Management in ReAPI
 
-ReAPI adopts a unique approach to version management that aligns with the overarching structure of a project rather than individual services. This method is particularly effective in maintaining consistency across services, especially when they share components.
+## Overview
 
-### Project-Level Versioning
+- **Simplicity in Versioning:** ReAPI makes it easy to manage multiple versions for a service, providing a straightforward approach to API versioning. This feature allows you to maintain different iterations of your APIs efficiently.
 
-- **Cross-Service Consistency**: In ReAPI, versioning is managed at the project level. This is due to the platform's support for cross-service component references, where a change in one component could impact multiple services. Ensuring that these changes are consistent across the entire project is crucial.
-- **Implication for Service-Level Versioning**: If you require versioning at the service level, it is recommended to create a project dedicated to that solo service. This approach allows for more granular control over the versioning of individual services.
+- **Initial Version State:** When a new version is created in ReAPI, its content starts as empty. This gives you the flexibility to define the version content according to your needs.
 
-### Development Cycle and Version Archiving
+- **Manual Updates:** It's crucial to manually update the content of a new version once you are satisfied with the changes made in the live version. This ensures that the version reflects the desired state of your API.
 
-- **New Version Initiation**: When starting a new development cycle in ReAPI, the entire content of the project is packaged and archived under the previous version number. This archival ensures that there is a stable reference point for the project's state at the end of each development cycle.
-- **Ongoing Changes and Publishing**: After archiving, you can proceed to make and publish changes to the current version number throughout the development cycle. This flexibility allows for continuous integration and deployment practices.
-- **New Version for New Cycle**: At the commencement of a new development cycle, a new version is introduced. This marks the beginning of a fresh phase of development and updates.
+- **Reflecting Further Changes:** If further modifications are required after the initial update, you must re-update the version to incorporate these new changes. This step ensures that the latest improvements or adjustments are captured accurately.
 
-### Ensuring Consistency in Versioning
+This process helps maintain consistency and accuracy across different API versions, allowing for controlled and deliberate updates without disrupting existing integrations.
 
-- **Comprehensive Packaging**: Even minor changes within a version result in the packaging of the entire project. This approach is adopted to ensure that all components of the project remain consistent and aligned with the version's state.
-- **Project Integrity**: By packaging the whole project for each version, ReAPI ensures that the integrity and consistency of the project are maintained, regardless of the scale of changes made.
+## Live Version vs. Named Version
 
-### Conclusion
+**Live Version:**
 
-Version management in ReAPI is designed to uphold the integrity and consistency of the entire project. By focusing on project-level versioning and ensuring comprehensive packaging with each version, ReAPI facilitates a robust and reliable development process. This approach aligns well with modern development practices, accommodating the complexities of projects with multiple interdependent services.
+- **Real-time Updates:** The "live" version in ReAPI automatically updates with every edit and save you make. It's ideal for ongoing development and testing because it always reflects the latest changes.
+
+- **Reader View:** When accessing an API, the reader view uses the live version by default, ensuring viewers see the most current state of the API.
+
+**Named Version:**
+
+- **Stable Releases:** Named versions are like official releases. Once created, a named version captures your API's state at that point and makes it a standalone version. This is helpful for marking stable milestones or completed features.
+
+- **Consistency and Reliability:** Named versions are usually not changed after they’re created, which keeps them stable and reliable, especially important for production environments.
+
+- **Public Sharing:** Only named versions can be shared publicly. This means external users or partners can access a stable, tested version of your API, minimizing the risk of sharing unfinished or unstable features.
+
+- **Dependency Management:** If your API relies on components from other services, creating a named version resolves these dependencies by incorporating them into the version. This ensures the named version is self-contained and doesn’t depend on external services, enhancing its stability and portability.
+
+This distinction between live and named versions helps you effectively manage the development lifecycle, supporting both iterative development and stable release management while ensuring dependencies are handled properly.
+
+## Making Changes to a Release
+
+We understand that there are situations where you need to make changes to a released version, such as correcting a typo or addressing a minor issue. In these cases, follow these steps to update a named version:
+
+1. **Create a Temporary Service:**
+
+   - Open the version edit dialog and create a temporary service. This will automatically copy the content into a new temporary service where you can make your changes.
+
+2. **Make and Save Changes:**
+
+   - Edit the temporary service as needed and save your changes. Ensure that all necessary updates are applied.
+
+3. **Publish Back to Named Version:**
+
+   - Once you are satisfied with the changes, publish the content back to the named version. This updates the named version with the corrected content.
+
+4. **Delete the Temporary Service:**
+   - Finally, delete the temporary service from the dialog. This step is important because the temporary service will use your service quota just like any normal service.
+
+**Note:** When editing a release, remember that it is self-contained and should not add dependencies to other services. If you need to create a version that relies on other services, you should clone the service instead of editing the release directly.
+
+These steps ensure that you can efficiently make necessary corrections to a release without disrupting your workflow or exceeding your service quota.
