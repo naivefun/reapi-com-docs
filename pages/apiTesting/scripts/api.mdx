@@ -1,0 +1,126 @@
+# API Reference
+
+### API Reference
+
+When working with custom scripts in ReAPI, you will have access to different objects and functions depending on the type of script you are writing. All ReAPI-specific objects and functions start with a `$` to distinguish them from other libraries and to make it easier to bring up auto-complete suggestions.
+
+Here’s an overview of the available objects and functions for each type of custom script:
+
+| **Script Type**    | **Available Objects/Functions**                                                                                                             | **Description**                                                                                                                                                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Run Script**     | **$context** _(Object)_                                                                                                                     | Access to the context object for reading and writing data.                                                                                                                                                                     |
+| **Before Request** | **$context** _(Object)_ <br/> **$request** _(Object)_                                                                                       | Access to the context object for reading and writing data.<br/>Access to the request object for reading and modifying the request before it is sent.                                                                           |
+| **After Response** | **$context** _(Object)_ <br/> **$response** _(Object)_ <br/> **$request** _(Object)_ (Read-only) <br/> **$addAssertionResult** _(Function)_ | Access to the context object for reading and writing data.<br/>Access to the response object for reading and modifying the response.<br/>Read-only access to the request object.<br/>Function to add custom assertion results. |
+
+#### Object and Function Details
+
+1. **$context** _(Object)_
+
+   - **Description**: The `$context` object allows you to read and write data that can be passed between different steps in your test flow.
+   - **Usage**:
+     ```javascript
+     async function myCustomScript() {
+       $context.token = "newTokenValue"; // Write to context
+       console.log($context.token); // Read from context
+     }
+     ```
+
+2. **$request** _(Object)_
+
+   - **Description**: The `$request` object provides access to the API request data, allowing you to modify it before it is sent.
+   - **Usage**:
+     ```javascript
+     async function myBeforeRequestScript() {
+       $request.headers["Authorization"] = `Bearer ${$context.token}`; // Modify request header
+       $request.body = { key: "value" }; // Modify request body
+     }
+     ```
+
+3. **$response** _(Object)_
+
+   - **Description**: The `$response` object allows you to access and modify the API response data.
+   - **Usage**:
+     ```javascript
+     async function myAfterResponseScript() {
+       const responseData = $response.data; // Access response data
+       $response.data.customField = "customValue"; // Modify response data
+     }
+     ```
+
+4. **$addAssertionResult** _(Function)_
+   - **Description**: The `$addAssertionResult` function allows you to add custom assertions to your test results. This is particularly useful in the `afterResponse` hook.
+   - **Usage**:
+     ```javascript
+     async function myAfterResponseScript() {
+       const isWithinRange =
+         $response.data.value > 10 && $response.data.value < 20;
+       $addAssertionResult({...}); // Add custom assertion
+     }
+     ```
+
+By understanding and utilizing these objects and functions, you can fully leverage ReAPI's custom script capabilities to create powerful, flexible, and detailed API tests.
+
+### Types and Signature
+
+When working with custom scripts in ReAPI, it’s important to understand the types and signatures of the key objects and functions available to you. Below are the details for each:
+
+1. **$context**: `Record<string, any>`
+
+   - **Description**: The `$context` object is a key-value store that you can use to read and write data throughout your test flow. It is essentially a `Record` type where each key is a string, and the value can be of any type.
+
+   ```typescript
+   $context: Record<string, any>;
+   ```
+
+2. **$request**: `RequestData`
+
+   - **Description**: The `$request` object represents the structure of an API request. You can use it to modify the request before it is sent in a `beforeRequest` script.
+
+   ```typescript
+   interface RequestData {
+     baseUrl?: string; // The base URL of the request. Optional if `path` is an absolute URL.
+     path: string; // The specific path of the request, absolute or relative to `baseUrl`.
+     method: string; // The HTTP method used for the request, such as GET or POST.
+     query: Record<string, any>; // Optional query parameters to append to the URL.
+     headers: Record<string, string>; // Optional headers to include in the request.
+     body?: any; // The body of the request, optional and serializable.
+     withCredentials?: boolean; // Optional flag indicating if credentials should be included.
+     timeout?: number; // Optional timeout for the request in milliseconds.
+   }
+   ```
+
+3. **$response**: `ResponseData`
+
+   - **Description**: The `$response` object represents the structure of an API response. It is available for reading and modifying in an `afterResponse` script.
+
+   ```typescript
+   interface ResponseData {
+     status: number; // The HTTP status code of the response.
+     statusText?: string; // Textual representation of the response status, if any.
+     headers: Record<string, any>; // Headers received in the response.
+     data?: any; // The body of the response, if any.
+     time: number; // Time taken for the request to complete, in milliseconds.
+     size?: number; // Size of the response data, in bytes.
+     request: RequestData; // Information about the request that initiated this response.
+     startedAt: number; // Timestamp when the request was initiated.
+     completedAt: number; // Timestamp when the response was received.
+   }
+   ```
+
+4. **$addAssertionResult**: `function $addAssertionResult(result: AssertionResult): void`
+
+   - **Description**: The `$addAssertionResult` function allows you to manually add assertion results in an `afterResponse` script. This is useful for custom validations that are not covered by standard assertions.
+
+   ```typescript
+   interface AssertionResult {
+     passed: boolean; // Indicates whether the assertion passed or failed.
+     actualValue: any; // The actual value obtained during the test.
+     expectedValue: any; // The expected value to compare against the actual value.
+     message: string; // A message describing the outcome of the assertion.
+     meta?: any; // Optional metadata related to the assertion.
+   }
+
+   function $addAssertionResult(result: AssertionResult): void;
+   ```
+
+By understanding these types and signatures, you can better utilize the ReAPI platform's capabilities, ensuring that your custom scripts are both powerful and compliant with the expected structures.

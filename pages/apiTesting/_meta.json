@@ -5,6 +5,7 @@
   "context": "Context and Variables",
   "testCaseEditor": "Test Case",
   "testRunner": "Test Runner & Report",
+  "scripts": "Custom Scripts",
   "loadTest": "Load Test",
   "testDeployment": "Deployment & Automation",
   "configReference": "Configuration Reference"

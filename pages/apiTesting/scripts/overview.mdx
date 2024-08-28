@@ -1,0 +1,117 @@
+# Custom Scripts Overview
+
+### Overview of Custom Script Support
+
+Even with extensive no-code support, custom scripts remain a powerful tool in an API testing platform. Custom scripts offer flexibility and precision that may not be achievable with predefined nodes alone. They allow users to handle complex scenarios, implement custom logic, or integrate with external systems in ways that a no-code platform might not natively support.
+
+Custom scripts are particularly useful when:
+
+1. **Handling Edge Cases**: Some API behaviors or conditions may be too specific or complex to model with no-code tools alone.
+
+   - **Example**: Encrypting a portion of a request body using a custom encryption algorithm before sending it to the API.
+
+2. **Implementing Complex Logic and Assertions**: Custom scripts allow for intricate decision-making processes or data transformations that go beyond standard operations, including complex assertions.
+
+   - **Example**: For a geo-based application, you might want to assert that a point is within a circle centered at a specific location. This calculation can be complex and may require an external library to perform accurately.
+
+3. **Extending Functionality**: They provide the ability to extend the platform's capabilities by incorporating external libraries or integrating with other systems.
+   - **Example**: Integrating with an external authentication service to generate and inject a custom token into API requests.
+
+In essence, custom scripts complement the no-code capabilities of the platform, offering advanced users the freedom to implement unique solutions tailored to their specific testing needs.
+
+### ReAPI's Script Support
+
+ReAPI's custom script support is **exclusively for JavaScript**, as it is a web browser-based application. This ensures that scripts run efficiently within the platform's environment.
+
+ReAPI's script support includes three types of scripts, each designed for specific purposes within your API testing flows. Here’s an overview of each type and examples of how they can be used:
+
+1. **Standalone Script Node**
+
+   - **Description**: A standalone script node allows you to prepare data and modify the context before the execution of subsequent nodes. You can use this node to perform tasks like generating dynamic data, fetching external resources, or transforming context variables.
+   - **Example**: Load a token from an external authentication service and set `context.token = 'tokenValue'`. This token can then be used in subsequent API requests.
+
+2. **API Before Request Hook**
+
+   - **Description**: The API before request hook allows you to modify the request before it is sent. This is particularly useful for tasks like encrypting request payloads, adding custom headers, or generating API signatures.
+   - **Example**: Encrypt sensitive data in the request body before sending it to the API. Another example could be generating a custom API signature and appending it to the request headers.
+
+3. **API After Response Hook**
+   - **Description**: The API after response hook allows you to modify the response before it is processed by the next steps. You can use this hook for custom assertions, transforming response data, or integrating results with the UI for enhanced reporting.
+   - **Example**: For a geo-based application, use a custom script to calculate whether a point is within a certain radius from a given location. The script can then assert this condition and integrate the result with the UI, providing a visual representation of the test outcome.
+
+#### Possible Use Cases for Each Script Type
+
+- **Standalone Script Node**:
+
+  - Fetch and prepare data from an external service, such as retrieving exchange rates and setting them in the context for financial API tests.
+  - Generate and set random test data, such as creating a list of user IDs to be used in a subsequent iteration node.
+
+- **API Before Request Hook**:
+
+  - Generate and attach a time-based one-time password (TOTP) for multi-factor authentication.
+  - Dynamically set headers based on the current environment or user role.
+
+- **API After Response Hook**:
+  - Normalize response data by converting all date-time fields to a standard format before performing assertions.
+  - Aggregate data from multiple responses and store the results in the context for comparison in later steps.
+
+By leveraging these script types, you can enhance the flexibility and capability of your test cases, enabling more sophisticated and tailored testing scenarios.
+
+### Request and Global API Hooks
+
+ReAPI offers powerful flexibility with its support for both request-specific API hooks and global API hooks, allowing you to tailor your test environment to match various scenarios.
+
+1. **Global API Hooks with Dynamic Binding**
+
+   - **Description**: In addition to hooks for individual API requests, ReAPI supports global API hooks that can be dynamically bound at runtime. Unlike other platforms that tie hooks to folders, ReAPI allows you to bind these hooks like selecting variable groups. This approach provides greater flexibility, especially in scenarios where you need to support environments with or without specific features, such as encryption.
+   - **Example**: Imagine you need to support both encryption-enabled and encryption-disabled environments. With ReAPI’s dynamic binding, you can easily switch on/off encrypt/decrypt scripts as needed by simply selecting the appropriate global hook at runtime.
+
+2. **API Hook Chaining**
+
+   - **Description**: ReAPI supports chaining multiple `beforeRequest` and `afterResponse` hooks, allowing you to activate several scripts that run in sequence for each API call. This feature enables more complex and layered processing of requests and responses.
+   - **Examples**:
+     - **Chained beforeRequest Hooks**: First hook to add a custom header, the second to generate and append an API signature, and the third to encrypt the request body.
+     - **Chained afterResponse Hooks**: First hook to decrypt the response, the second to normalize date formats, and the third to log response data to an external monitoring service.
+
+3. **Hook Execution Order**
+
+   - **Description**: One key difference in ReAPI is the execution order of hooks. By default, global `beforeRequest` hooks run after request-specific `beforeRequest` hooks, and global `afterResponse` hooks run before request-specific `afterResponse` hooks. This order ensures that request-specific logic is processed first, with global hooks applying broader, cross-cutting concerns.
+   - **Example**: If a request-specific hook modifies the request payload, a global `beforeRequest` hook can further enhance or validate that payload after the initial modification.
+
+4. **Custom Hook Order (Coming Soon)**
+   - **Description**: ReAPI will soon introduce the ability to customize the order of hook execution. This feature will allow you to fine-tune the sequence in which your hooks are executed, providing even more control over the processing logic.
+   - **Why This is Useful**: Customizing hook order can be crucial when certain operations depend on others. For example, you may want to ensure that a decryption hook always runs before a data transformation hook, or that a logging hook captures the final state of the response after all modifications are complete.
+
+By leveraging these features, you can create sophisticated and adaptable testing environments that cater to a wide range of scenarios, all while maintaining precise control over how your API requests and responses are processed.
+
+### External Library Support
+
+ReAPI's flexibility extends to supporting external libraries, allowing you to incorporate additional functionality into your API tests. Here's how you can leverage external libraries within ReAPI:
+
+1. **Loading Libraries via CDN**
+
+   - ReAPI supports loading libraries via CDN URLs, provided they support browser mode or come with a UMD bundle that exposes a global instance. Many popular libraries, such as Lodash, expose a global object (e.g., `_` for Lodash), which you can directly call in your scripts, like `_.trim()`.
+   - **Example**: To use Lodash, simply load the CDN URL, and you can start using its functions directly in your custom scripts.
+
+2. **Handling Non-UMD Libraries**
+
+   - For libraries that do not come with a UMD bundle, such as Faker.js, you will need to rebundle them and host them on a custom CDN URL. This rebundling process ensures that the library can be loaded and used in the ReAPI environment.
+   - **Example**: Rebundle Faker.js to expose a global instance and upload it to a CDN for use in ReAPI.
+
+3. **Type Support for Enhanced Editing**
+
+   - The web editor for JavaScript can be limiting without type support. When you register a library on ReAPI, you can also provide a TypeScript typing file URL. This typing file is loaded into the editor, enabling features like auto-complete, error-checking, and inline documentation.
+   - **Challenge**: Unfortunately, not all libraries come with a single packaged typing file. In such cases, rebundling may be required to create a unified typing file.
+   - **Example**: Providing the typing file for Lodash or Moment.js allows the editor to offer full IDE-like support, making coding smoother and more efficient.
+
+4. **Predefined Libraries**
+
+   - ReAPI has predefined several popular libraries, such as Lodash, Moment.js, Faker.js, Turf, Crypto-JS, and more. These libraries have been properly rebundled and come with the appropriate typing information. When you use these libraries, you will experience a similar level of support as you would in a desktop IDE.
+   - **Example**: Using Moment.js to manipulate dates or Turf.js for geospatial operations becomes straightforward, with full auto-complete and type checking available.
+
+5. **Rebundling Guidance**
+   - The rebundling process can be complex, especially for those not familiar with the JavaScript ecosystem. Recognizing this, we will publish a guide to help you rebundle libraries and prepare them for use in ReAPI.
+
+### Comparison and Wrap-Up
+
+While many API testing platforms offer basic scripting capabilities, ReAPI goes further by allowing you to integrate external libraries seamlessly. This capability not only extends the functionality of your tests but also provides a development experience that rivals desktop IDEs. With the support for CDN-based libraries, type definitions, and predefined popular libraries, ReAPI ensures that even complex test scenarios can be handled with ease. As we continue to enhance our platform, including adding more predefined libraries and rebundling guides, ReAPI remains committed to providing a powerful, flexible, and user-friendly testing environment.

@@ -1,0 +1,56 @@
+# Get Started with Custom Scripts
+
+Before diving into custom scripts, **make sure you have read the [overview section](../scripts/overview)** to understand the context and benefits of using custom scripts in ReAPI.
+
+## Considerations and Strict Rules for Writing Scripts in ReAPI
+
+Scripts in ReAPI are designed with specific considerations and strict rules to ensure they are effective, maintainable, and provide the best possible editing experience.
+
+**Considerations:**
+
+1. **Favoring Async/Await Over Callbacks**: To simplify asynchronous operations and avoid callback hell, ReAPI encourages the use of `async/await` syntax.
+2. **Optimized Editing Experience**: The structure and rules for scripts are designed to provide optimal support for auto-complete, error-checking, and other IDE-like features in the web editor.
+
+**Rules:**
+
+1. **Each Script Must Be an Async Function**:
+
+   - **Requirement**: Every custom script must be an `async` function.
+   - **Structure**: The script must strictly start with `async function funcName() {` and end with `}`. No code or comments are allowed outside of this function structure.
+   - **Function Name**: Only `runScript`, `beforeRequest`, and `afterResponse` are allowed as function names.
+   - **Example**:
+     ```javascript
+     async function beforeRequest() {
+       // Your code here
+     }
+     ```
+
+2. **Always Use Await and Promise-Based APIs**:
+
+   - **Requirement**: Use `await` with promise-based APIs for all asynchronous operations.
+   - **Handling Callbacks**: If you need to use a callback-based API, wrap it in a promise. You can use libraries like `pify` to easily convert callback-based functions into promise-based ones.
+   - **Example**:
+
+     ```javascript
+     async function runScript() {
+       const response = await fetch("https://api.example.com/data");
+       const data = response.json();
+       // Process data
+     }
+     ```
+
+3. **Modify Data with JSON-Compatible Types Only**:
+   - **Requirement**: When modifying or assigning data within your script, ensure that only JSON-compatible data types are used. Complex data types that cannot be serialized (e.g., functions, DOM elements) are not allowed.
+   - **Example**:
+     ```javascript
+     async function afterResponse() {
+       const user = {
+         name: "John Doe",
+         age: 30,
+         // Only JSON-compatible data types
+       };
+       $context.userData = user; // Valid assignment
+     }
+     ```
+
+Following these rules ensures that your custom scripts are efficient, maintainable, and compatible with ReAPI’s environment, providing a smooth experience in both scripting and test execution.
