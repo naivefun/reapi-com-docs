@@ -1,0 +1,157 @@
+# Mocking Service
+
+### Overview of Mocking Services
+
+Mocking services are invaluable tools in API testing, allowing developers and testers to simulate API responses and behaviors without needing access to the actual backend services. This is particularly useful in scenarios where the backend is still under development, or when testing edge cases and error responses that are difficult to reproduce with real APIs.
+
+Despite their usefulness, there are surprisingly few handy and accessible mocking services available. Many existing tools either lack essential features, are too complex to set up, or do not integrate seamlessly with modern testing workflows. This gap often forces teams to either develop their own mock servers or compromise on the quality and coverage of their tests.
+
+By providing a robust and easy-to-use mocking service, you can greatly enhance your API testing process, allowing for more comprehensive testing and faster development cycles.
+
+### Get Started With ReAPI's Mocking Service
+
+ReAPI's mocking service is an integral part of the API design workflow, offering a simple yet powerful way to simulate API responses. This feature allows you to quickly create mock data and test your API interactions without needing the actual backend services.
+
+#### How to Create Mocking Data
+
+1. **Start with API Design**:
+
+   - Begin by creating an API design in ReAPI, specifying at least the URL and HTTP method. This minimal setup is all you need to get started with mocking data.
+   - Though starting with only the HTTP method and URL is convenient, if you design your API with schema definitions, ReAPI’s data generator can generate data for you. ReAPI supports quick generation or ChatGPT-based generation. If you have already defined your response data, it only takes a few clicks to generate high-quality data, especially if your data is large and complicated.
+
+2. **Access the Mock Tab**:
+
+   - Once your API design is in place, click on the 'Mock' tab at the top of the interface. This is where you can define your mocking service.
+
+3. **Create Mock Responses**:
+
+   - In the Mock tab, you can create mock responses based on HTTP status codes. For example, add a status code of `200` for a successful response or `403` for a forbidden response.
+   - For each status code, add the corresponding response JSON data that you want to return.
+   - Save your settings, and your mock service is ready to use.
+
+4. **Use the Mock Service**:
+   - Copy the generated URL and make requests against it. Your defined mock data will be returned as the response, allowing you to test how your application handles various scenarios.
+
+This straightforward approach to mocking allows you to easily simulate different API behaviors and responses, making it a valuable tool in your API testing and development process.
+
+### Response Selector
+
+ReAPI’s mocking service allows you to define multiple response data variations for a single HTTP status, giving you greater flexibility in simulating different scenarios. Here’s how you can leverage the response selector feature:
+
+1. **Multiple Responses for One HTTP Status**:
+
+   - You can define several response data options for a single HTTP status. By default, the mocking server will randomly select one of these responses for each request.
+
+2. **Selecting a Specific Response**:
+
+   - If you want to choose a specific response rather than relying on random selection, you can do so by specifying a `code` in your mock configuration. Then, when making a request, include the `_code_` parameter in your query string or request header to pick the corresponding response body.
+
+   - **Example**:
+
+     - Define two responses for a `200` status:
+       - `code: 1` with response data: `{"message": "Success - Response 1"}`
+       - `code: 2` with response data: `{"message": "Success - Response 2"}`
+     - When sending a request, if you want to receive the first response, add `_code_=1` to your query string or header.
+
+     ```http
+     GET /api/resource?_code_=1
+     ```
+
+     or
+
+     ```http
+     GET /api/resource
+     Header: _code_: 1
+     ```
+
+3. **Selecting a Specific HTTP Status**:
+
+   - Similarly, you can define multiple HTTP statuses for the same endpoint. Use the `_status_` parameter in your query string or header to select which status code you’d like the mocking server to return.
+
+   - **Example**:
+
+     - Define responses for both `200` and `404` statuses:
+       - `status: 200` with response data: `{"message": "Resource found"}`
+       - `status: 404` with response data: `{"error": "Resource not found"}`
+     - To receive the `404` status, add `_status_=404` to your query string or header.
+
+     ```http
+     GET /api/resource?_status_=404
+     ```
+
+     or
+
+     ```http
+     GET /api/resource
+     Header: _status_: 404
+     ```
+
+By utilizing the response selector, you can create more dynamic and versatile mock servers that closely mimic the complexities of real-world API interactions. This feature is particularly useful for testing how your application handles different scenarios, such as error handling or varied success responses.
+
+### Path Parameter
+
+ReAPI’s mocking service intelligently handles path parameters, making it easy to simulate realistic API responses even when your requests include dynamic URL segments.
+
+1. **Automatic Path Matching**:
+
+   - If your endpoint includes path parameters, such as `/users/{userId}`, ReAPI will automatically match requests with realistic URLs like `/users/1` or `/users/123`, returning the appropriate mock response for the matched path. This allows you to simulate responses for endpoints with dynamic segments.
+
+2. **Priority of Specific URLs**:
+
+   - If you have defined a more specific URL, such as `/users/10`, ReAPI will prioritize this exact match over a more general path parameter like `/users/{userId}`. This means that if a request is made to `/users/10`, the mock server will return the response defined for that specific URL first.
+
+3. **Dynamic Value Usage**:
+   - The path parameter, such as `userId=1`, is recognized as part of the dynamic parameters. These dynamic values can be leveraged in your response body for generating dynamic content based on the incoming request, as explained in the next section.
+
+By understanding how ReAPI handles path parameters, you can create more precise and flexible mock servers that cater to a wide variety of testing scenarios, from general cases to highly specific endpoint responses.
+
+### Dynamic Data Generation Support
+
+ReAPI's mocking service includes support for dynamic data generation, allowing your mock responses to reflect real-time values from incoming requests. This feature adds a layer of realism to your mock API, making it especially useful for testing scenarios where response data needs to match request parameters.
+
+1. **Dynamic Data in Mocking**:
+
+   - ReAPI's mocking service supports a certain level of dynamic data generation, which is often sufficient for most mocking purposes. This dynamic behavior enables your mock responses to adapt based on the incoming request parameters, providing a more interactive and realistic testing experience.
+   - **Important Note**: The dynamic feature must be explicitly enabled in your response data configuration. For performance reasons, if this feature is not enabled, the mocking service will ignore dynamic placeholders and treat the response data as static.
+
+2. **Dynamic Values from Path and Query Parameters**:
+
+   - When a request is received, the mocking service captures any path parameters (e.g., `/users/{userId}`) and query parameters (e.g., `/users?id=1`). These captured parameters can be used as dynamic values in your mock response.
+   - In your mock response body, you can define properties with dynamic placeholders using the `{{paramName}}` syntax. When the response is generated, these placeholders will be replaced with the corresponding dynamic values from the request.
+
+   - **Example**:
+     - Assume you have a mock endpoint defined as `/users/{userId}`.
+     - If a request comes in with the URL `/users/123`, and your response body includes:
+       ```json
+       {
+         "id": "{{userId}}",
+         "name": "User {{userId}}",
+         "detailsUrl": "/users/{{userId}}/details"
+       }
+       ```
+     - The response returned by the mock service will be:
+       ```json
+       {
+         "id": "123",
+         "name": "User 123",
+         "detailsUrl": "/users/123/details"
+       }
+       ```
+     - This is particularly useful when you want the response data to match certain elements from the request, such as an `id`. It ensures that the data is consistent and can be used for tasks like click-through navigation, where the `id` or other parameters need to persist across requests.
+
+3. **Simple Faker Data Generation Support**:
+   - ReAPI also supports simple data generation using `faker.js`. You can generate dynamic values like avatars or names by using placeholders in your response body, such as `{{faker.image.avatarGitHub}}`.
+   - **Example**:
+     - If you want to generate a random GitHub avatar URL, your response body could include:
+       ```json
+       {
+         "id": "{{userId}}",
+         "avatar": "{{faker.image.avatarGitHub}}"
+       }
+       ```
+     - This would generate a response with a dynamic avatar URL for each request.
+   - **Why This is Useful**:
+     - Faker.js integration allows you to inject realistic, randomly generated data into your mock responses. This is particularly helpful when testing scenarios that require varied or unique data, such as simulating different user profiles, generating placeholder images, or populating fields with realistic data. However, note that ReAPI currently only supports simple calls without parameters to ensure ease of use and maintain performance.
+     - For a full list of available APIs, please refer to the [Faker.js API documentation](https://fakerjs.dev/api/).
+
+By leveraging both dynamic request parameters and simple faker data generation, ReAPI's mocking service enables you to create highly interactive and realistic mock APIs, enhancing the depth and coverage of your testing efforts. Remember to enable the dynamic feature in your response data configuration to take full advantage of these capabilities.
