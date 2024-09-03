@@ -4,6 +4,7 @@
   "env": "Environment Management",
   "context": "Context and Variables",
   "testCaseEditor": "Test Case",
+  "testCaseBestPractices": "Test Case Best Practices",
   "testRunner": "Test Runner & Report",
   "scripts": "Custom Scripts",
   "loadTest": "Load Test",
