@@ -6,6 +6,7 @@
   "testCaseEditor": "Test Case",
   "testCaseBestPractices": "Test Case Best Practices",
   "testRunner": "Test Runner & Report",
+  "runnerOptions": "Test Runner Options",
   "scripts": "Custom Scripts",
   "soap": "SOAP Testing",
   "loadTest": "Load Test",

@@ -1,0 +1,36 @@
+# Test Runner Options and Automation
+
+## Types of Test Runners
+
+ReAPI provides three types of Test Runners to suit different testing needs:
+
+### 1. Browser Runner
+
+- The **Browser Runner** is used for designing and debugging test cases and test runners directly within the browser runtime. It is particularly suited for **Chrome**, as it requires the Chrome extension to bypass **CORS** restrictions when access is not open to ReAPI.com. This runner is ideal for users who are in the process of developing or troubleshooting their tests in an interactive environment.
+
+### 2. CLI Runner
+
+- The **CLI Runner** is designed for running tests from the command line locally. It executes test deployment configurations on your local machine, providing **private network access**, which makes it ideal for **CI/CD integration**. The CLI Runner offers a seamless way to integrate ReAPI testing with your existing development workflows, allowing developers to run tests as part of their local or pipeline processes.
+  - **CLI with Config File**: Download the test deployment configuration file and run it using the file path. This is the most reliable method, as the test file resides on your file system. Upon test completion, a test result JSON file is generated on your local file system at the specified path, which can then be manually uploaded to ReAPI.com to visualize the test details. Users need to handle **notifications** about test results manually.
+  - **CLI with Remote Access** (Available for subscribers after trial): You can also run tests using a remote address, such as `'remote://testDeploymentRemoteId'`. This method automatically downloads the latest test deployment configuration and, upon test completion, automatically uploads the test result to the cloud. This method also includes a **built-in notification service** that triggers when the test result is uploaded.
+
+### 3. Cloud Runner (Paid Feature)
+
+- The **Cloud Runner** is hosted by ReAPI.com on **Google Cloud**, which means there is **no need for server setup**. This runner supports **scheduled runs** using cron or interval configurations, making it ideal for teams that prefer to hand over the responsibility of running tests to ReAPI. The Cloud Runner is especially useful for ensuring consistent and hands-off execution of tests across different environments.
+- **Webhook Integration**: Webhook is available for **CI/CD integration** when required. This runner has a **built-in notification service** that informs users when the test result is uploaded.
+
+### Test Runner Comparison Table
+
+| Test Runner Type        | Best Suited For               | Key Features                                                                                                                                                                                                |
+| ----------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Browser Runner**      | Designing and debugging tests | Runs in browser runtime (Chrome), requires Chrome extension for CORS, interactive testing environment                                                                                                       |
+| **CLI Runner**          | Local and CI/CD integration   | Runs locally, supports private network access, config file method for reliability (manual notification), remote access option for automation (Available for subscribers after trial, built-in notification) |
+| **Cloud Runner** (Paid) | Hands-off, scalable testing   | No server setup required, hosted on Google Cloud, supports scheduling, webhook available for CI/CD integration, built-in notification                                                                       |
+
+## Automating the Test Runner
+
+While manual testing is essential during the development phase, automation brings reliability and consistency over time. The ReAPI Test Runner can be **deployed for automation** through various methods:
+
+- **CLI and Cloud Runner**: Automate tests by using ReAPI’s CLI or Cloud runners. The CLI offers local execution, while the Cloud Runner allows for flexible, scalable testing without managing the infrastructure.
+- **Scheduled Runs**: Schedule runs to execute at specific intervals, ensuring that your API is tested regularly, even outside working hours.
+- **Webhook Triggered Runs**: Integrate with your CI/CD pipeline to trigger the Test Runner upon events like a code push, build, or deployment, providing a seamless flow from development to testing.
